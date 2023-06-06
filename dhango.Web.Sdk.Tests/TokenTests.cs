@@ -52,6 +52,37 @@ namespace dhango.Web.Sdk.Tests
         }
 
         [TestMethod]
+        public void UsingOnlyAnAccountKeyShouldAllowCreationOnly()
+        {
+            var accountKeytokensApi = new TokensApi(apiSettings.BaseUrl,
+                null!,
+                null!);
+
+            var postTokenRequest = CreatePostTokenRequestForCard();
+            var postTokenResponse = accountKeytokensApi.TokensPost(postTokenRequest, apiSettings.AccountKey);
+
+            Assert.IsTrue(postTokenResponse.Id > 0);
+
+
+            try
+            {
+                // Using only an account key should not allow other operations.
+                accountKeytokensApi.TokensIdDelete(postTokenResponse.Id, apiSettings.AccountKey);
+
+                Assert.Fail();
+            }
+            catch (ApiException ex)
+            {
+                Assert.AreEqual(401, ex.ErrorCode);
+            }
+
+            // Other operations still require the key and secret.
+            var getTokenResponse = tokensApi.TokensIdGet(postTokenResponse.Id, apiSettings.AccountKey);
+
+            Assert.IsNotNull(getTokenResponse);
+        }
+
+        [TestMethod]
         public void UsingCardTokenForPaymentShouldBeSuccessful()
         {
             var postTokenRequest = CreatePostTokenRequestForCard();
@@ -150,14 +181,14 @@ namespace dhango.Web.Sdk.Tests
             var postTokenResponse = tokensApi.TokensPost(postTokenRequest);
 
             var postPayRequest = CreatePostPayRequestWithTokenId(postTokenResponse.Id!.Value);
-            var postPayResponse = transactionsApi.TransactionsPayPost(postPayRequest, apiSettings.MerchantKey);
+            var postPayResponse = transactionsApi.TransactionsPayPost(postPayRequest, apiSettings.AccountKey);
         }
 
         [TestMethod]
         public void MerchantTokenOnPlatformTransactionShouldNotWork()
         {
             var postTokenRequest = CreatePostTokenRequestForAch();
-            var postTokenResponse = tokensApi.TokensPost(postTokenRequest, apiSettings.MerchantKey);
+            var postTokenResponse = tokensApi.TokensPost(postTokenRequest, apiSettings.AccountKey);
 
             try
             {

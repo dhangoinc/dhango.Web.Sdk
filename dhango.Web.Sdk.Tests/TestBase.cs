@@ -18,7 +18,7 @@ namespace dhango.Web.Sdk.Tests
                 BaseUrl = configurationSection["baseUrl"],
                 Key = configurationSection["key"],
                 Secret = configurationSection["secret"],
-                MerchantKey = configurationSection["merchantkey"],
+                AccountKey = configurationSection["accountKey"],
             };
         }
 

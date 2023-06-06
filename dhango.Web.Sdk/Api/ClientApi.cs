@@ -39,6 +39,9 @@ namespace dhango.Web.Sdk.Api
 
         protected void AddAuthorizationHeader(Configuration configuration, string key, string secret)
         {
+            // The caller might only be using an account key with no key + secret.
+            if (key == null) return;
+
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(key + ":" + secret);
             var headerValue = "Basic " + System.Convert.ToBase64String(plainTextBytes);
 
