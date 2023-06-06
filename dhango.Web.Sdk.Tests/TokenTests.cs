@@ -1,0 +1,237 @@
+﻿using dhango.Web.Sdk.Api;
+using dhango.Web.Sdk.Client;
+using dhango.Web.Sdk.Model;
+
+namespace dhango.Web.Sdk.Tests
+{
+    [TestClass]
+    public class TokenTests : TestBase
+    {
+        private ApiSettings apiSettings = null!;
+        private TokensApi tokensApi = null!;
+        private TransactionsApi transactionsApi = null!;
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            apiSettings = GetApiSettings();
+
+            tokensApi = new TokensApi(apiSettings.BaseUrl,
+                apiSettings.Key,
+                apiSettings.Secret);
+
+            transactionsApi = new TransactionsApi(apiSettings.BaseUrl,
+                apiSettings.Key,
+                apiSettings.Secret);
+        }
+
+        [TestMethod]
+        public void ShouldBeAbleToCreateGetAndDeleteToken()
+        {
+            var postTokenRequest = CreatePostTokenRequestForCard();
+            var postTokenResponse = tokensApi.TokensPost(postTokenRequest);
+
+            Assert.IsTrue(postTokenResponse.Id > 0);
+
+            var getTokenResponse = tokensApi.TokensIdGet(postTokenResponse.Id);
+
+            Assert.IsNotNull(getTokenResponse);
+
+            tokensApi.TokensIdDelete(postTokenResponse.Id);
+
+            try
+            {
+                tokensApi.TokensIdGet(postTokenResponse.Id);
+
+                Assert.Fail();
+            }
+            catch (ApiException ex)
+            {
+                Assert.AreEqual(404, ex.ErrorCode);
+            }
+        }
+
+        [TestMethod]
+        public void UsingCardTokenForPaymentShouldBeSuccessful()
+        {
+            var postTokenRequest = CreatePostTokenRequestForCard();
+            var postTokenResponse = tokensApi.TokensPost(postTokenRequest);
+            
+            var postPayRequest = CreatePostPayRequestWithTokenId(postTokenResponse.Id!.Value);
+
+            var postPayResponse = transactionsApi.TransactionsPayPost(postPayRequest);
+            var getResponse = transactionsApi.TransactionsIdGet(postPayResponse.Id);
+
+            Assert.IsNotNull(getResponse);
+            Assert.IsNull(getResponse.Events.SingleOrDefault(x => x.TransactionEventType == TransactionEventType.Reject));
+        }
+
+        [TestMethod]
+        public void UsingAchTokenForPaymentShouldBeSuccessful()
+        {
+            var postTokenRequest = CreatePostTokenRequestForAch();
+            var postTokenResponse = tokensApi.TokensPost(postTokenRequest);
+
+            var postPayRequest = CreatePostPayRequestWithTokenId(postTokenResponse.Id!.Value);
+
+            var postPayResponse = transactionsApi.TransactionsPayPost(postPayRequest);
+            var getResponse = transactionsApi.TransactionsIdGet(postPayResponse.Id);
+
+            Assert.IsNotNull(getResponse);
+            Assert.IsNull(getResponse.Events.SingleOrDefault(x => x.TransactionEventType == TransactionEventType.Reject));
+        }
+
+        [TestMethod]
+        public void UsingCardTokenForAuthorizationShouldBeSuccessful()
+        {
+            var postTokenRequest = CreatePostTokenRequestForCard();
+            var postTokenResponse = tokensApi.TokensPost(postTokenRequest);
+
+            var authorizeRequest = new PostAuthorizeRequest
+            {
+                Payer = "John Smith",
+                UserId = "jsmith12345",
+                EmailAddress = "jsmith@example.com",
+                TokenId = postTokenResponse.Id,
+                Metadata = GetMetadata(),
+                BillingAddress = GetAddress(),
+                ShippingAddress = GetAddress(),
+                Amount = 787.33,
+                PayerFee = 5.12,
+                PlatformFee = 5.12,
+                Currency = Currency.USD,
+                Comments = "We are so excited about this purchase!",
+            };
+            var authorizeResponse = transactionsApi.TransactionsAuthorizePost(authorizeRequest);
+
+            Assert.IsTrue(authorizeResponse.Success);
+        }
+
+        [TestMethod]
+        public void UsingAchTokenForAuthorizationShouldFail()
+        {
+            var postTokenRequest = CreatePostTokenRequestForAch();
+            var postTokenResponse = tokensApi.TokensPost(postTokenRequest);
+
+            var authorizeRequest = new PostAuthorizeRequest
+            {
+                Payer = "John Smith",
+                UserId = "jsmith12345",
+                EmailAddress = "jsmith@example.com",
+                TokenId = postTokenResponse.Id,
+                Metadata = GetMetadata(),
+                BillingAddress = GetAddress(),
+                ShippingAddress = GetAddress(),
+                Amount = 787.33,
+                PayerFee = 5.12,
+                PlatformFee = 5.12,
+                Currency = Currency.USD,
+                Comments = "We are so excited about this purchase!",
+            };
+
+            try
+            {
+                var authorizeResponse = transactionsApi.TransactionsAuthorizePost(authorizeRequest);
+
+                Assert.Fail();
+            }
+            catch(ApiException exception)
+            {
+                Assert.AreEqual(400, exception.ErrorCode);
+            }
+        }
+
+        // This is an example of how to share tokens. The token can be created at the platform level
+        // and used across all accounts under the platform.
+        [TestMethod]
+        public void PlatformTokenOnMerchantTransactionShouldWork()
+        {
+            var postTokenRequest = CreatePostTokenRequestForAch();
+            var postTokenResponse = tokensApi.TokensPost(postTokenRequest);
+
+            var postPayRequest = CreatePostPayRequestWithTokenId(postTokenResponse.Id!.Value);
+            var postPayResponse = transactionsApi.TransactionsPayPost(postPayRequest, apiSettings.MerchantKey);
+        }
+
+        [TestMethod]
+        public void MerchantTokenOnPlatformTransactionShouldNotWork()
+        {
+            var postTokenRequest = CreatePostTokenRequestForAch();
+            var postTokenResponse = tokensApi.TokensPost(postTokenRequest, apiSettings.MerchantKey);
+
+            try
+            {
+                var postPayRequest = CreatePostPayRequestWithTokenId(postTokenResponse.Id!.Value);
+                var postPayResponse = transactionsApi.TransactionsPayPost(postPayRequest);
+
+                Assert.Fail();
+            }
+            catch (ApiException exception)
+            {
+                Assert.AreEqual(400, exception.ErrorCode);
+            }
+        }
+
+        [TestMethod]
+        public void PaymentWithoutAddressShouldUseTokenBillingAddress()
+        {
+            var postTokenRequest = CreatePostTokenRequestForAch();
+            var postTokenResponse = tokensApi.TokensPost(postTokenRequest);
+
+            var postPayRequest = CreatePostPayRequestWithTokenId(postTokenResponse.Id!.Value);
+
+            postPayRequest.BillingAddress = null!;
+            postPayRequest.ShippingAddress = null!;
+
+            var postPayResponse = transactionsApi.TransactionsPayPost(postPayRequest);
+
+            var getResponse = transactionsApi.TransactionsIdGet(postPayResponse.Id);
+
+            Assert.IsNotNull(getResponse.BillingAddress);
+            Assert.IsNull(getResponse.ShippingAddress);
+        }
+
+        private PostTokenRequest CreatePostTokenRequestForCard()
+        {
+            return new PostTokenRequest
+            {
+                UserId = "jsmith12345",
+                EmailAddress = "jsmith@example.com",
+                Card = GetCard(),
+                Metadata = GetMetadata(),
+                Address = GetAddress()
+            };
+        }
+
+        private PostTokenRequest CreatePostTokenRequestForAch()
+        {
+            return new PostTokenRequest
+            {
+                UserId = "jsmith12345",
+                EmailAddress = "jsmith@example.com",
+                Ach = GetAch(),
+                Metadata = GetMetadata(),
+                Address = GetAddress()
+            };
+        }
+
+        private PostPayRequest CreatePostPayRequestWithTokenId(long id)
+        {
+            return new PostPayRequest
+            {
+                Payer = "John Smith",
+                UserId = "jsmith12345",
+                EmailAddress = "jsmith@example.com",
+                TokenId = id,
+                Metadata = GetMetadata(),
+                BillingAddress = GetAddress(),
+                ShippingAddress = GetAddress(),
+                Amount = 787.33,
+                PayerFee = 5.12,
+                PlatformFee = 5.12,
+                Currency = Currency.USD,
+                Comments = "We are so excited about this purchase!",
+            };
+        }
+    }
+}
