@@ -1,0 +1,46 @@
+﻿@page
+@model dhango.Web.Demo.Pages.PayerFeesModel
+@{
+    ViewData["Title"] = "Payer Fees";
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#calculatePayerFees').submit(function (event) {
+                $('#confirmation').text('');
+
+                event.preventDefault(); // Prevent form submission
+
+                // Retrieve form data
+                const amount = $('#amount').val();
+
+                getPayerFees("https://api.dhangodemo.com/", "merchantkey", amount, getPayerFeesHandler);
+            });
+        });
+
+        function getPayerFeesHandler(getPayerFeesResponse) {
+            console.log(getPayerFeesResponse.achFee);
+            console.log(getPayerFeesResponse.cardFee);
+
+            $('#confirmation').text('ACH Fee of ' + getPayerFeesResponse.achFee + ' and card fee of ' + getPayerFeesResponse.cardFee);
+        }
+    </script>
+}
+
+<div class="text-left">
+    <h1 class="display-4">Calculate Payer Fees</h1>
+    <p>This sample shows how to get the payer fees using a simple Javascript call.</p>
+</div>
+<div class="text-center">
+    <form id="calculatePayerFees">
+        <div>
+            <label for="amount">Amount</label>
+            <input name="amount" id="amount" value="100" />
+            <button type="submit" id="submit">Submit</button>
+        </div>
+        <label name="confirmation" id="confirmation"></label>
+    </form>
+</div>
+

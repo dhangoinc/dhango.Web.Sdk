@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dhango.Web.Sdk", "dhango.Web.Sdk\dhango.Web.Sdk.csproj", "{C369AF65-C58B-47A0-9D45-F075B7427700}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dhango.Web.Sdk", "dhango.Web.Sdk\dhango.Web.Sdk.csproj", "{C369AF65-C58B-47A0-9D45-F075B7427700}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dhango.Web.Sdk.Tests", "dhango.Web.Sdk.Tests\dhango.Web.Sdk.Tests.csproj", "{1CFBF1EE-60D0-44DF-9DFE-6CFF3ACC97C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dhango.Web.Sdk.Tests", "dhango.Web.Sdk.Tests\dhango.Web.Sdk.Tests.csproj", "{1CFBF1EE-60D0-44DF-9DFE-6CFF3ACC97C8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dhango.Web.Demo", "dhango.Web.Demo\dhango.Web.Demo.csproj", "{AC2EDDE9-969A-4601-B278-DE5946FFC529}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{1CFBF1EE-60D0-44DF-9DFE-6CFF3ACC97C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CFBF1EE-60D0-44DF-9DFE-6CFF3ACC97C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CFBF1EE-60D0-44DF-9DFE-6CFF3ACC97C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC2EDDE9-969A-4601-B278-DE5946FFC529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC2EDDE9-969A-4601-B278-DE5946FFC529}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC2EDDE9-969A-4601-B278-DE5946FFC529}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC2EDDE9-969A-4601-B278-DE5946FFC529}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
