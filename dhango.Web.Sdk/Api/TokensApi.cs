@@ -34,7 +34,7 @@ namespace dhango.Web.Sdk.Api
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
         /// <returns></returns>
-        void TokensIdDelete (long? id, string accountKey = null, string culture = null);
+        void TokensIdDelete (string id, string accountKey = null, string culture = null);
 
         /// <summary>
         /// Deletes a saved payment method. This will not any transactions that are already in process with this token.
@@ -47,7 +47,7 @@ namespace dhango.Web.Sdk.Api
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> TokensIdDeleteWithHttpInfo (long? id, string accountKey = null, string culture = null);
+        ApiResponse<Object> TokensIdDeleteWithHttpInfo (string id, string accountKey = null, string culture = null);
         /// <summary>
         /// Gets the masked details of a saved payment token.
         /// </summary>
@@ -59,7 +59,7 @@ namespace dhango.Web.Sdk.Api
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
         /// <returns>GetTokenResponse</returns>
-        GetTokenResponse TokensIdGet (long? id, string accountKey = null, string culture = null);
+        GetTokenResponse TokensIdGet (string id, string accountKey = null, string culture = null);
 
         /// <summary>
         /// Gets the masked details of a saved payment token.
@@ -72,7 +72,7 @@ namespace dhango.Web.Sdk.Api
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
         /// <returns>ApiResponse of GetTokenResponse</returns>
-        ApiResponse<GetTokenResponse> TokensIdGetWithHttpInfo (long? id, string accountKey = null, string culture = null);
+        ApiResponse<GetTokenResponse> TokensIdGetWithHttpInfo (string id, string accountKey = null, string culture = null);
         /// <summary>
         /// Saves a payment method as a token for later use.
         /// </summary>
@@ -111,7 +111,7 @@ namespace dhango.Web.Sdk.Api
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task TokensIdDeleteAsync (long? id, string accountKey = null, string culture = null);
+        System.Threading.Tasks.Task TokensIdDeleteAsync (string id, string accountKey = null, string culture = null);
 
         /// <summary>
         /// Deletes a saved payment method. This will not any transactions that are already in process with this token.
@@ -124,7 +124,7 @@ namespace dhango.Web.Sdk.Api
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> TokensIdDeleteAsyncWithHttpInfo (long? id, string accountKey = null, string culture = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> TokensIdDeleteAsyncWithHttpInfo (string id, string accountKey = null, string culture = null);
         /// <summary>
         /// Gets the masked details of a saved payment token.
         /// </summary>
@@ -136,7 +136,7 @@ namespace dhango.Web.Sdk.Api
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
         /// <returns>Task of GetTokenResponse</returns>
-        System.Threading.Tasks.Task<GetTokenResponse> TokensIdGetAsync (long? id, string accountKey = null, string culture = null);
+        System.Threading.Tasks.Task<GetTokenResponse> TokensIdGetAsync (string id, string accountKey = null, string culture = null);
 
         /// <summary>
         /// Gets the masked details of a saved payment token.
@@ -149,7 +149,7 @@ namespace dhango.Web.Sdk.Api
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
         /// <returns>Task of ApiResponse (GetTokenResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GetTokenResponse>> TokensIdGetAsyncWithHttpInfo (long? id, string accountKey = null, string culture = null);
+        System.Threading.Tasks.Task<ApiResponse<GetTokenResponse>> TokensIdGetAsyncWithHttpInfo (string id, string accountKey = null, string culture = null);
         /// <summary>
         /// Saves a payment method as a token for later use.
         /// </summary>
@@ -244,7 +244,7 @@ namespace dhango.Web.Sdk.Api
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
         /// <returns></returns>
-        public void TokensIdDelete (long? id, string accountKey = null, string culture = null)
+        public void TokensIdDelete (string id, string accountKey = null, string culture = null)
         {
              TokensIdDeleteWithHttpInfo(id, accountKey, culture);
         }
@@ -257,7 +257,7 @@ namespace dhango.Web.Sdk.Api
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> TokensIdDeleteWithHttpInfo (long? id, string accountKey = null, string culture = null)
+        public ApiResponse<Object> TokensIdDeleteWithHttpInfo (string id, string accountKey = null, string culture = null)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -319,7 +319,7 @@ namespace dhango.Web.Sdk.Api
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task TokensIdDeleteAsync (long? id, string accountKey = null, string culture = null)
+        public async System.Threading.Tasks.Task TokensIdDeleteAsync (string id, string accountKey = null, string culture = null)
         {
              await TokensIdDeleteAsyncWithHttpInfo(id, accountKey, culture);
 
@@ -333,7 +333,7 @@ namespace dhango.Web.Sdk.Api
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> TokensIdDeleteAsyncWithHttpInfo (long? id, string accountKey = null, string culture = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> TokensIdDeleteAsyncWithHttpInfo (string id, string accountKey = null, string culture = null)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -395,7 +395,7 @@ namespace dhango.Web.Sdk.Api
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
         /// <returns>GetTokenResponse</returns>
-        public GetTokenResponse TokensIdGet (long? id, string accountKey = null, string culture = null)
+        public GetTokenResponse TokensIdGet (string id, string accountKey = null, string culture = null)
         {
              ApiResponse<GetTokenResponse> localVarResponse = TokensIdGetWithHttpInfo(id, accountKey, culture);
              return localVarResponse.Data;
@@ -409,7 +409,7 @@ namespace dhango.Web.Sdk.Api
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
         /// <returns>ApiResponse of GetTokenResponse</returns>
-        public ApiResponse< GetTokenResponse > TokensIdGetWithHttpInfo (long? id, string accountKey = null, string culture = null)
+        public ApiResponse< GetTokenResponse > TokensIdGetWithHttpInfo (string id, string accountKey = null, string culture = null)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -474,7 +474,7 @@ namespace dhango.Web.Sdk.Api
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
         /// <returns>Task of GetTokenResponse</returns>
-        public async System.Threading.Tasks.Task<GetTokenResponse> TokensIdGetAsync (long? id, string accountKey = null, string culture = null)
+        public async System.Threading.Tasks.Task<GetTokenResponse> TokensIdGetAsync (string id, string accountKey = null, string culture = null)
         {
              ApiResponse<GetTokenResponse> localVarResponse = await TokensIdGetAsyncWithHttpInfo(id, accountKey, culture);
              return localVarResponse.Data;
@@ -489,7 +489,7 @@ namespace dhango.Web.Sdk.Api
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
         /// <returns>Task of ApiResponse (GetTokenResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<GetTokenResponse>> TokensIdGetAsyncWithHttpInfo (long? id, string accountKey = null, string culture = null)
+        public async System.Threading.Tasks.Task<ApiResponse<GetTokenResponse>> TokensIdGetAsyncWithHttpInfo (string id, string accountKey = null, string culture = null)
         {
             // verify the required parameter 'id' is set
             if (id == null)
