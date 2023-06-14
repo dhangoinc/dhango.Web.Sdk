@@ -34,7 +34,7 @@ namespace dhango.Web.Sdk.Model
         /// </summary>
         /// <value>The unique identifier of the token.</value>
         [DataMember(Name="id", EmitDefaultValue=false)]
-        public long? Id { get; set; }
+        public string? Id { get; set; }
 
         /// <summary>
         /// The user Id from the application that represents the user that owns this payment method.
