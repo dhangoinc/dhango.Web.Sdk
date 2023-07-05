@@ -119,9 +119,9 @@ namespace dhango.Web.Sdk.Tests
                 Currency = Currency.USD,
                 Comments = "We are so excited about this purchase!",
             };
-            var authorizeResponse = transactionsApi.TransactionsAuthorizePost(authorizeRequest, apiSettings.MerchantKey);
+            var authorizeResponse = transactionsApi.TransactionsAuthorizePost(authorizeRequest, apiSettings.AccountKey);
 
-            Assert.IsNotNull(transactionsApi.TransactionsIdGet(authorizeResponse.Id, apiSettings.MerchantKey));
+            Assert.IsNotNull(transactionsApi.TransactionsIdGet(authorizeResponse.Id, apiSettings.AccountKey));
 
             try
             {

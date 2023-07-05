@@ -1,0 +1,75 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#createToken').submit(function (event) {
+                $('#confirmation').text('');
+
+                event.preventDefault(); // Prevent form submission
+
+                var postTokenRequest = {
+                    card: {
+                        cardHolder: $('#cardHolder').val(),
+                        cardNumber: $('#cardNumber').val(),
+                        expirationMonth: $('#expirationMonth').val(),
+                        expirationYear: $('#expirationYear').val(),
+                        securityCode: $('#securityCode').val()
+                    }
+                };
+
+                postToken("https://api.dhangodemo.com/", "merchantkey", postTokenRequest, postTokenHandler, postTokenErrorHandler);
+            });
+        });
+
+        function postTokenHandler(postTokenResponse) {
+            console.log(postTokenResponse);
+
+            $('#confirmation').text('Successfully created a token of ' + postTokenResponse.id + '.');
+        }
+
+        function postTokenErrorHandler(errors) {
+            // Modify the card number to trigger this error handler.
+            $('#confirmation').text(errors['Card.CardNumber']);
+        }
+    </script>
+}
+
+<div class="text-left">
+    <h1 class="display-4">Create a Payment Token</h1>
+    <p>This sample shows how to save a payment method and generate a token using a simple Javascript call.</p>
+</div>
+<div class="text-center">
+    <form id="createToken">
+        <div>
+            <label for="cardHolder">Card Holder</label>
+            <input name="cardHolder" id="cardHolder" value="John Smith" />
+        </div>
+        <div>
+            <label for="cardNumber">Card Number</label>
+            <input name="cardNumber" id="cardNumber" value="4895379980003055" />
+        </div>
+        <div>
+            <label for="expirationMonth">Expiration Month</label>
+            <input name="expirationMonth" id="expirationMonth" value="12" />
+        </div>
+        <div>
+            <label for="expirationYear">Expiration Year</label>
+            <input name="expirationYear" id="expirationYear" value="2025" />
+        </div>
+        <div>
+            <label for="securityCode">Security Code</label>
+            <input name="securityCode" id="securityCode" value="123" />
+        </div>
+        <div>
+            <button type="submit" id="submit">Submit</button>
+        </div>
+        <label id="confirmation"></label>
+    </form>
+</div>
+
