@@ -31,7 +31,7 @@ namespace dhango.Web.Sdk.Tests
             var postTokenRequest = CreatePostTokenRequestForCard();
             var postTokenResponse = tokensApi.TokensPost(postTokenRequest);
 
-            Assert.IsTrue(postTokenResponse.Id > 0);
+            Assert.IsNotNull(postTokenResponse.Id);
 
             var getTokenResponse = tokensApi.TokensIdGet(postTokenResponse.Id);
 
@@ -52,12 +52,42 @@ namespace dhango.Web.Sdk.Tests
         }
 
         [TestMethod]
+        public void UsingOnlyAnAccountKeyShouldAllowCreationOnly()
+        {
+            var accountKeytokensApi = new TokensApi(apiSettings.BaseUrl,
+                null!,
+                null!);
+
+            var postTokenRequest = CreatePostTokenRequestForCard();
+            var postTokenResponse = accountKeytokensApi.TokensPost(postTokenRequest, apiSettings.AccountKey);
+
+            Assert.IsNotNull(postTokenResponse.Id);
+
+            try
+            {
+                // Using only an account key should not allow other operations.
+                accountKeytokensApi.TokensIdDelete(postTokenResponse.Id, apiSettings.AccountKey);
+
+                Assert.Fail();
+            }
+            catch (ApiException ex)
+            {
+                Assert.AreEqual(401, ex.ErrorCode);
+            }
+
+            // Other operations still require the key and secret.
+            var getTokenResponse = tokensApi.TokensIdGet(postTokenResponse.Id, apiSettings.AccountKey);
+
+            Assert.IsNotNull(getTokenResponse);
+        }
+
+        [TestMethod]
         public void UsingCardTokenForPaymentShouldBeSuccessful()
         {
             var postTokenRequest = CreatePostTokenRequestForCard();
             var postTokenResponse = tokensApi.TokensPost(postTokenRequest);
             
-            var postPayRequest = CreatePostPayRequestWithTokenId(postTokenResponse.Id!.Value);
+            var postPayRequest = CreatePostPayRequestWithTokenId(postTokenResponse.Id!);
 
             var postPayResponse = transactionsApi.TransactionsPayPost(postPayRequest);
             var getResponse = transactionsApi.TransactionsIdGet(postPayResponse.Id);
@@ -72,7 +102,7 @@ namespace dhango.Web.Sdk.Tests
             var postTokenRequest = CreatePostTokenRequestForAch();
             var postTokenResponse = tokensApi.TokensPost(postTokenRequest);
 
-            var postPayRequest = CreatePostPayRequestWithTokenId(postTokenResponse.Id!.Value);
+            var postPayRequest = CreatePostPayRequestWithTokenId(postTokenResponse.Id!);
 
             var postPayResponse = transactionsApi.TransactionsPayPost(postPayRequest);
             var getResponse = transactionsApi.TransactionsIdGet(postPayResponse.Id);
@@ -149,19 +179,19 @@ namespace dhango.Web.Sdk.Tests
             var postTokenRequest = CreatePostTokenRequestForAch();
             var postTokenResponse = tokensApi.TokensPost(postTokenRequest);
 
-            var postPayRequest = CreatePostPayRequestWithTokenId(postTokenResponse.Id!.Value);
-            var postPayResponse = transactionsApi.TransactionsPayPost(postPayRequest, apiSettings.MerchantKey);
+            var postPayRequest = CreatePostPayRequestWithTokenId(postTokenResponse.Id!);
+            var postPayResponse = transactionsApi.TransactionsPayPost(postPayRequest, apiSettings.AccountKey);
         }
 
         [TestMethod]
         public void MerchantTokenOnPlatformTransactionShouldNotWork()
         {
             var postTokenRequest = CreatePostTokenRequestForAch();
-            var postTokenResponse = tokensApi.TokensPost(postTokenRequest, apiSettings.MerchantKey);
+            var postTokenResponse = tokensApi.TokensPost(postTokenRequest, apiSettings.AccountKey);
 
             try
             {
-                var postPayRequest = CreatePostPayRequestWithTokenId(postTokenResponse.Id!.Value);
+                var postPayRequest = CreatePostPayRequestWithTokenId(postTokenResponse.Id!);
                 var postPayResponse = transactionsApi.TransactionsPayPost(postPayRequest);
 
                 Assert.Fail();
@@ -178,7 +208,7 @@ namespace dhango.Web.Sdk.Tests
             var postTokenRequest = CreatePostTokenRequestForAch();
             var postTokenResponse = tokensApi.TokensPost(postTokenRequest);
 
-            var postPayRequest = CreatePostPayRequestWithTokenId(postTokenResponse.Id!.Value);
+            var postPayRequest = CreatePostPayRequestWithTokenId(postTokenResponse.Id!);
 
             postPayRequest.BillingAddress = null!;
             postPayRequest.ShippingAddress = null!;
@@ -215,7 +245,7 @@ namespace dhango.Web.Sdk.Tests
             };
         }
 
-        private PostPayRequest CreatePostPayRequestWithTokenId(long id)
+        private PostPayRequest CreatePostPayRequestWithTokenId(string id)
         {
             return new PostPayRequest
             {

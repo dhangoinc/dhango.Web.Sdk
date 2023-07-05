@@ -55,7 +55,7 @@ namespace dhango.Web.Sdk.Model
         /// </summary>
         /// <value>The token identifier for a previously saved payment method. If this is supplied, the other payment  options can be left as null.</value>
         [DataMember(Name="tokenId", EmitDefaultValue=false)]
-        public long? TokenId { get; set; }
+        public string? TokenId { get; set; }
 
         /// <summary>
         /// Gets or Sets Card

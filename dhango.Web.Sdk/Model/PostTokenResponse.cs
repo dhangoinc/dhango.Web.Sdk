@@ -34,7 +34,7 @@ namespace dhango.Web.Sdk.Model
         /// </summary>
         /// <value>The unique identifier of the successfully created payment token.</value>
         [DataMember(Name="id", EmitDefaultValue=false)]
-        public long? Id { get; set; }
+        public string? Id { get; set; }
 
         /// <summary>
         /// The error message, if any.

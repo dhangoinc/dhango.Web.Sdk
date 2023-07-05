@@ -44,6 +44,12 @@ namespace dhango.Web.Sdk.Model
         public string RoutingNumber { get; set; }
 
         /// <summary>
+        /// Gets or Sets BankAccountType
+        /// </summary>
+        [DataMember(Name = "bankAccountType", EmitDefaultValue = false)]
+        public BankAccountType? BankAccountType { get; set; }
+
+        /// <summary>
         /// The full account number.
         /// </summary>
         /// <value>The full account number.</value>
@@ -59,6 +65,7 @@ namespace dhango.Web.Sdk.Model
             var sb = new StringBuilder();
             sb.Append("class Ach {\n");
             sb.Append("  BankAccountHolder: ").Append(BankAccountHolder).Append("\n");
+            sb.Append("  BankAccountType: ").Append(BankAccountType).Append("\n");
             sb.Append("  RoutingNumber: ").Append(RoutingNumber).Append("\n");
             sb.Append("  AccountNumber: ").Append(AccountNumber).Append("\n");
             sb.Append("}\n");
@@ -94,12 +101,17 @@ namespace dhango.Web.Sdk.Model
             if (input == null)
                 return false;
 
-            return 
+            return
                 (
                     this.BankAccountHolder == input.BankAccountHolder ||
                     (this.BankAccountHolder != null &&
                     this.BankAccountHolder.Equals(input.BankAccountHolder))
-                ) && 
+                ) &&
+                (
+                    this.BankAccountType == input.BankAccountType ||
+                    (this.BankAccountType != null &&
+                    this.BankAccountType.Equals(input.BankAccountType))
+                ) &&
                 (
                     this.RoutingNumber == input.RoutingNumber ||
                     (this.RoutingNumber != null &&
@@ -123,6 +135,8 @@ namespace dhango.Web.Sdk.Model
                 int hashCode = 41;
                 if (this.BankAccountHolder != null)
                     hashCode = hashCode * 59 + this.BankAccountHolder.GetHashCode();
+                if (this.BankAccountType != null)
+                    hashCode = hashCode * 59 + this.BankAccountType.GetHashCode();
                 if (this.RoutingNumber != null)
                     hashCode = hashCode * 59 + this.RoutingNumber.GetHashCode();
                 if (this.AccountNumber != null)
