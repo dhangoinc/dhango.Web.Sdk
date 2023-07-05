@@ -39,6 +39,7 @@ namespace dhango.Web.Sdk.Tests
             return new Ach
             {
                 BankAccountHolder = "Acme Corporation",
+                BankAccountType = BankAccountType.CorporateSavings,
                 RoutingNumber = "021000021",
                 AccountNumber = "08292983191"
             };
