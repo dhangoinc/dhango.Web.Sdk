@@ -128,8 +128,6 @@ namespace dhango.Web.Sdk.Tests
                 BillingAddress = GetAddress(),
                 ShippingAddress = GetAddress(),
                 Amount = amount,
-                PayerFee = Math.Round(amount * .03, 2),
-                PlatformFee = Math.Round(amount * .01, 2),
                 Currency = Currency.USD,
                 Comments = "We are so excited about this purchase!",
             };
@@ -155,8 +153,6 @@ namespace dhango.Web.Sdk.Tests
                 BillingAddress = GetAddress(),
                 ShippingAddress = GetAddress(),
                 Amount = amount,
-                PayerFee = Math.Round(amount * .03, 2),
-                PlatformFee = Math.Round(amount * .01, 2),
                 Currency = Currency.USD,
                 Comments = "We are so excited about this purchase!",
             };

@@ -35,26 +35,29 @@ namespace dhango.Web.Sdk.Tests
                 BillingAddress = GetAddress(),
                 ShippingAddress = GetAddress(),
                 Amount = amount,
-                PayerFee = Math.Round(amount * .03, 2),
-                PlatformFee = Math.Round(amount * .01, 2),
                 Currency = Currency.USD,
                 Comments = "We are so excited about this purchase!",
             };
-            var authorizeResponse = transactionsApi.TransactionsAuthorizePost(authorizeRequest);
+            var authorizeResponse = transactionsApi.TransactionsAuthorizePost(authorizeRequest, apiSettings.AccountKey);
 
             Assert.IsTrue(authorizeResponse.Id > 0);
 
-            var getAuthorizeResponse = transactionsApi.TransactionsIdGet(authorizeResponse.Id);
+            var getAuthorizeResponse = transactionsApi.TransactionsIdGet(authorizeResponse.Id, apiSettings.AccountKey);
 
             Assert.IsNotNull(getAuthorizeResponse);
 
             var captureAmount = Math.Round(amount * .4, 2);
             var captureResponse = transactionsApi.TransactionsIdCapturePost(authorizeResponse.Id
-                , new PostCaptureRequest { Amount = captureAmount });
+                , new PostCaptureRequest
+                {
+                    Amount = captureAmount,
+                    PayerFee = Math.Round(amount * .03, 2),
+                    PlatformFee = Math.Round(amount * .01, 2),
+                }, apiSettings.AccountKey);
 
             Assert.IsTrue(captureResponse.Id > 0);
 
-            var getCaptureResponse = transactionsApi.TransactionsIdGet(captureResponse.Id);
+            var getCaptureResponse = transactionsApi.TransactionsIdGet(captureResponse.Id, apiSettings.AccountKey);
 
             Assert.IsTrue(captureResponse.Success);
             Assert.AreEqual(captureAmount, getCaptureResponse.Amount);
@@ -74,8 +77,6 @@ namespace dhango.Web.Sdk.Tests
                 BillingAddress = GetAddress(),
                 ShippingAddress = GetAddress(),
                 Amount = amount,
-                PayerFee = Math.Round(amount * .03, 2),
-                PlatformFee = Math.Round(amount * .01, 2),
                 Currency = Currency.USD,
                 Comments = "We are so excited about this purchase!",
             };
@@ -119,8 +120,6 @@ namespace dhango.Web.Sdk.Tests
                 BillingAddress = GetAddress(),
                 ShippingAddress = GetAddress(),
                 Amount = amount,
-                PayerFee = Math.Round(amount * .03, 2),
-                PlatformFee = Math.Round(amount * .01, 2),
                 Currency = Currency.USD,
                 Comments = "We are so excited about this purchase!",
             };
@@ -160,8 +159,8 @@ namespace dhango.Web.Sdk.Tests
                 Comments = "We are so excited about this purchase!",
             };
 
-            var postPayResponse = transactionsApi.TransactionsPayPost(request);
-            var getResponse = transactionsApi.TransactionsIdGet(postPayResponse.Id);
+            var postPayResponse = transactionsApi.TransactionsPayPost(request, apiSettings.AccountKey);
+            var getResponse = transactionsApi.TransactionsIdGet(postPayResponse.Id, apiSettings.AccountKey);
 
             Assert.IsNotNull(getResponse);
             Assert.IsNull(getResponse.Events.SingleOrDefault(x => x.TransactionEventType == TransactionEventType.Reject));
@@ -187,9 +186,8 @@ namespace dhango.Web.Sdk.Tests
                 Comments = "We are so excited about this purchase!",
             };
 
-            var postPayResponse = transactionsApi.TransactionsPayPost(request);
-
-            var getResponse = transactionsApi.TransactionsIdGet(postPayResponse.Id);
+            var postPayResponse = transactionsApi.TransactionsPayPost(request, apiSettings.AccountKey);
+            var getResponse = transactionsApi.TransactionsIdGet(postPayResponse.Id, apiSettings.AccountKey);
 
             Assert.IsNotNull(getResponse);
             Assert.IsNull(getResponse.Events.SingleOrDefault(x => x.TransactionEventType == TransactionEventType.Reject));
