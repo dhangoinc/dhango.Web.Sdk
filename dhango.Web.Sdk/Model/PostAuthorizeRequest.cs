@@ -90,20 +90,6 @@ namespace dhango.Web.Sdk.Model
         public double? Amount { get; set; }
 
         /// <summary>
-        /// The amount the payer is being charged to initiate this transaction. This should only be a non-zero amount when  you are charging the payer a fee (e.g. a convenience fee or surcharge).
-        /// </summary>
-        /// <value>The amount the payer is being charged to initiate this transaction. This should only be a non-zero amount when  you are charging the payer a fee (e.g. a convenience fee or surcharge).</value>
-        [DataMember(Name="payerFee", EmitDefaultValue=false)]
-        public double? PayerFee { get; set; }
-
-        /// <summary>
-        /// The amount the platform is charging the account for this transaction. If left null, the fee will be calculated   automatically based on the fee settings on the account. This is only used as an override to that calculation.  Only the platform can set this fee.
-        /// </summary>
-        /// <value>The amount the platform is charging the account for this transaction. If left null, the fee will be calculated   automatically based on the fee settings on the account. This is only used as an override to that calculation.  Only the platform can set this fee.</value>
-        [DataMember(Name="platformFee", EmitDefaultValue=false)]
-        public double? PlatformFee { get; set; }
-
-        /// <summary>
         /// Gets or Sets Currency
         /// </summary>
         [DataMember(Name="currency", EmitDefaultValue=false)]
@@ -133,8 +119,6 @@ namespace dhango.Web.Sdk.Model
             sb.Append("  BillingAddress: ").Append(BillingAddress).Append("\n");
             sb.Append("  ShippingAddress: ").Append(ShippingAddress).Append("\n");
             sb.Append("  Amount: ").Append(Amount).Append("\n");
-            sb.Append("  PayerFee: ").Append(PayerFee).Append("\n");
-            sb.Append("  PlatformFee: ").Append(PlatformFee).Append("\n");
             sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("  Comments: ").Append(Comments).Append("\n");
             sb.Append("}\n");
@@ -218,16 +202,6 @@ namespace dhango.Web.Sdk.Model
                     this.Amount.Equals(input.Amount))
                 ) && 
                 (
-                    this.PayerFee == input.PayerFee ||
-                    (this.PayerFee != null &&
-                    this.PayerFee.Equals(input.PayerFee))
-                ) && 
-                (
-                    this.PlatformFee == input.PlatformFee ||
-                    (this.PlatformFee != null &&
-                    this.PlatformFee.Equals(input.PlatformFee))
-                ) && 
-                (
                     this.Currency == input.Currency ||
                     (this.Currency != null &&
                     this.Currency.Equals(input.Currency))
@@ -266,10 +240,6 @@ namespace dhango.Web.Sdk.Model
                     hashCode = hashCode * 59 + this.ShippingAddress.GetHashCode();
                 if (this.Amount != null)
                     hashCode = hashCode * 59 + this.Amount.GetHashCode();
-                if (this.PayerFee != null)
-                    hashCode = hashCode * 59 + this.PayerFee.GetHashCode();
-                if (this.PlatformFee != null)
-                    hashCode = hashCode * 59 + this.PlatformFee.GetHashCode();
                 if (this.Currency != null)
                     hashCode = hashCode * 59 + this.Currency.GetHashCode();
                 if (this.Comments != null)
