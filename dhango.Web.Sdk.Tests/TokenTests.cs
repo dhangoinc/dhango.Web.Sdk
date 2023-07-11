@@ -114,6 +114,7 @@ namespace dhango.Web.Sdk.Tests
         [TestMethod]
         public void UsingCardTokenForAuthorizationShouldBeSuccessful()
         {
+            var amount = new Random().Next(10, 1500);
             var postTokenRequest = CreatePostTokenRequestForCard();
             var postTokenResponse = tokensApi.TokensPost(postTokenRequest);
 
@@ -126,9 +127,7 @@ namespace dhango.Web.Sdk.Tests
                 Metadata = GetMetadata(),
                 BillingAddress = GetAddress(),
                 ShippingAddress = GetAddress(),
-                Amount = 787.33,
-                PayerFee = 5.12,
-                PlatformFee = 5.12,
+                Amount = amount,
                 Currency = Currency.USD,
                 Comments = "We are so excited about this purchase!",
             };
@@ -140,6 +139,7 @@ namespace dhango.Web.Sdk.Tests
         [TestMethod]
         public void UsingAchTokenForAuthorizationShouldFail()
         {
+            var amount = new Random().Next(10, 1500);
             var postTokenRequest = CreatePostTokenRequestForAch();
             var postTokenResponse = tokensApi.TokensPost(postTokenRequest);
 
@@ -152,9 +152,7 @@ namespace dhango.Web.Sdk.Tests
                 Metadata = GetMetadata(),
                 BillingAddress = GetAddress(),
                 ShippingAddress = GetAddress(),
-                Amount = 787.33,
-                PayerFee = 5.12,
-                PlatformFee = 5.12,
+                Amount = amount,
                 Currency = Currency.USD,
                 Comments = "We are so excited about this purchase!",
             };
@@ -247,6 +245,8 @@ namespace dhango.Web.Sdk.Tests
 
         private PostPayRequest CreatePostPayRequestWithTokenId(string id)
         {
+            var amount = new Random().Next(10, 1500);
+
             return new PostPayRequest
             {
                 Payer = "John Smith",
@@ -256,9 +256,9 @@ namespace dhango.Web.Sdk.Tests
                 Metadata = GetMetadata(),
                 BillingAddress = GetAddress(),
                 ShippingAddress = GetAddress(),
-                Amount = 787.33,
-                PayerFee = 5.12,
-                PlatformFee = 5.12,
+                Amount = amount,
+                PayerFee = Math.Round(amount * .03, 2),
+                PlatformFee = Math.Round(amount * .01, 2),
                 Currency = Currency.USD,
                 Comments = "We are so excited about this purchase!",
             };

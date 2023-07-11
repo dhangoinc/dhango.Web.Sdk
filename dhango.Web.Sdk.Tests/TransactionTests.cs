@@ -23,6 +23,8 @@ namespace dhango.Web.Sdk.Tests
         [TestMethod]
         public void AuthorizeAndCaptureShouldWork()
         {
+            // We are using a random number here just to create various transaction sizes.
+            var amount = new Random().Next(10, 1500);
             var authorizeRequest = new PostAuthorizeRequest
             {
                 Payer = "John Smith",
@@ -32,34 +34,39 @@ namespace dhango.Web.Sdk.Tests
                 Metadata = GetMetadata(),
                 BillingAddress = GetAddress(),
                 ShippingAddress = GetAddress(),
-                Amount = 787.33,
-                PayerFee = 5.12,
-                PlatformFee = 5.12,
+                Amount = amount,
                 Currency = Currency.USD,
                 Comments = "We are so excited about this purchase!",
             };
-            var authorizeResponse = transactionsApi.TransactionsAuthorizePost(authorizeRequest);
+            var authorizeResponse = transactionsApi.TransactionsAuthorizePost(authorizeRequest, apiSettings.AccountKey);
 
             Assert.IsTrue(authorizeResponse.Id > 0);
 
-            var getAuthorizeResponse = transactionsApi.TransactionsIdGet(authorizeResponse.Id);
+            var getAuthorizeResponse = transactionsApi.TransactionsIdGet(authorizeResponse.Id, apiSettings.AccountKey);
 
             Assert.IsNotNull(getAuthorizeResponse);
 
+            var captureAmount = Math.Round(amount * .4, 2);
             var captureResponse = transactionsApi.TransactionsIdCapturePost(authorizeResponse.Id
-                , new PostCaptureRequest { Amount = 234.11 });
+                , new PostCaptureRequest
+                {
+                    Amount = captureAmount,
+                    PayerFee = Math.Round(amount * .03, 2),
+                    PlatformFee = Math.Round(amount * .01, 2),
+                }, apiSettings.AccountKey);
 
             Assert.IsTrue(captureResponse.Id > 0);
 
-            var getCaptureResponse = transactionsApi.TransactionsIdGet(captureResponse.Id);
+            var getCaptureResponse = transactionsApi.TransactionsIdGet(captureResponse.Id, apiSettings.AccountKey);
 
             Assert.IsTrue(captureResponse.Success);
-            Assert.AreEqual(234.11, getCaptureResponse.Amount);
+            Assert.AreEqual(captureAmount, getCaptureResponse.Amount);
         }
 
         [TestMethod]
         public void AuthorizeAndVoidShouldWork()
         {
+            var amount = new Random().Next(10, 1500);
             var authorizeRequest = new PostAuthorizeRequest
             {
                 Payer = "John Smith",
@@ -69,9 +76,7 @@ namespace dhango.Web.Sdk.Tests
                 Metadata = GetMetadata(),
                 BillingAddress = GetAddress(),
                 ShippingAddress = GetAddress(),
-                Amount = 787.33,
-                PayerFee = 5.12,
-                PlatformFee = 5.12,
+                Amount = amount,
                 Currency = Currency.USD,
                 Comments = "We are so excited about this purchase!",
             };
@@ -104,6 +109,7 @@ namespace dhango.Web.Sdk.Tests
         [TestMethod]
         public void ShouldRequireMerchantKeyToAccessMerchantTransaction()
         {
+            var amount = new Random().Next(10, 1500);
             var authorizeRequest = new PostAuthorizeRequest
             {
                 Payer = "John Smith",
@@ -113,9 +119,7 @@ namespace dhango.Web.Sdk.Tests
                 Metadata = GetMetadata(),
                 BillingAddress = GetAddress(),
                 ShippingAddress = GetAddress(),
-                Amount = 787.33,
-                PayerFee = 5.12,
-                PlatformFee = 5.12,
+                Amount = amount,
                 Currency = Currency.USD,
                 Comments = "We are so excited about this purchase!",
             };
@@ -138,6 +142,7 @@ namespace dhango.Web.Sdk.Tests
         [TestMethod]
         public void AchPaymentShouldWork()
         {
+            var amount = new Random().Next(10, 1500);
             var request = new PostPayRequest
             {
                 Payer = "John Smith",
@@ -147,15 +152,15 @@ namespace dhango.Web.Sdk.Tests
                 Metadata = GetMetadata(),
                 BillingAddress = GetAddress(),
                 ShippingAddress = GetAddress(),
-                Amount = 787.33,
-                PayerFee = 5.12,
-                PlatformFee = 5.12,
+                Amount = amount,
+                PayerFee = Math.Round(amount * .03, 2),
+                PlatformFee = Math.Round(amount * .01, 2),
                 Currency = Currency.USD,
                 Comments = "We are so excited about this purchase!",
             };
 
-            var postPayResponse = transactionsApi.TransactionsPayPost(request);
-            var getResponse = transactionsApi.TransactionsIdGet(postPayResponse.Id);
+            var postPayResponse = transactionsApi.TransactionsPayPost(request, apiSettings.AccountKey);
+            var getResponse = transactionsApi.TransactionsIdGet(postPayResponse.Id, apiSettings.AccountKey);
 
             Assert.IsNotNull(getResponse);
             Assert.IsNull(getResponse.Events.SingleOrDefault(x => x.TransactionEventType == TransactionEventType.Reject));
@@ -164,6 +169,7 @@ namespace dhango.Web.Sdk.Tests
         [TestMethod]
         public void CreditCardPaymentShouldWork()
         {
+            var amount = new Random().Next(10, 1500);
             var request = new PostPayRequest
             {
                 Payer = "John Smith",
@@ -173,16 +179,15 @@ namespace dhango.Web.Sdk.Tests
                 Metadata = GetMetadata(),
                 BillingAddress = GetAddress(),
                 ShippingAddress = GetAddress(),
-                Amount = 787.33,
-                PayerFee = 5.12,
-                PlatformFee = 5.12,
+                Amount = amount,
+                PayerFee = Math.Round(amount * .03, 2),
+                PlatformFee = Math.Round(amount * .01, 2),
                 Currency = Currency.USD,
                 Comments = "We are so excited about this purchase!",
             };
 
-            var postPayResponse = transactionsApi.TransactionsPayPost(request);
-
-            var getResponse = transactionsApi.TransactionsIdGet(postPayResponse.Id);
+            var postPayResponse = transactionsApi.TransactionsPayPost(request, apiSettings.AccountKey);
+            var getResponse = transactionsApi.TransactionsIdGet(postPayResponse.Id, apiSettings.AccountKey);
 
             Assert.IsNotNull(getResponse);
             Assert.IsNull(getResponse.Events.SingleOrDefault(x => x.TransactionEventType == TransactionEventType.Reject));
