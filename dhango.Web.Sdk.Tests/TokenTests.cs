@@ -245,7 +245,7 @@ namespace dhango.Web.Sdk.Tests
 
         private PostPayRequest CreatePostPayRequestWithTokenId(string id)
         {
-            var amount = new Random().Next(10, 1500);
+            var amount = new Random().Next(1000, 150000);
 
             return new PostPayRequest
             {
@@ -257,8 +257,8 @@ namespace dhango.Web.Sdk.Tests
                 BillingAddress = GetAddress(),
                 ShippingAddress = GetAddress(),
                 Amount = amount,
-                PayerFee = Math.Round(amount * .03, 2),
-                PlatformFee = Math.Round(amount * .01, 2),
+                PayerFee = (long)Math.Round(amount * .03, 0),
+                PlatformFee = (long)Math.Round(amount * .01, 0),
                 Currency = Currency.USD,
                 Comments = "We are so excited about this purchase!",
             };
