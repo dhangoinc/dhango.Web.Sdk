@@ -93,14 +93,14 @@ namespace dhango.Web.Sdk.Model
         /// </summary>
         /// <value>The total amount of the transaction. This is inclusive all fees, if any. This will be a negative amount in the  case of refunds, ACH returns, chargebacks, etc.</value>
         [DataMember(Name="amount", EmitDefaultValue=false)]
-        public double? Amount { get; set; }
+        public long? Amount { get; set; }
 
         /// <summary>
         /// The amount the payer was charged to initiate this transaction, if any. This would be a non-zero amount when  the payer is charged a fee (e.g. a convenience fee or surcharge).
         /// </summary>
         /// <value>The amount the payer was charged to initiate this transaction, if any. This would be a non-zero amount when  the payer is charged a fee (e.g. a convenience fee or surcharge).</value>
         [DataMember(Name="payerFee", EmitDefaultValue=false)]
-        public double? PayerFee { get; set; }
+        public long? PayerFee { get; set; }
 
         /// <summary>
         /// Gets or Sets Currency
