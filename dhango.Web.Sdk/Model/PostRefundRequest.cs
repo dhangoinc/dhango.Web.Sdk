@@ -34,7 +34,7 @@ namespace dhango.Web.Sdk.Model
         /// </summary>
         /// <value>The amount to be refunded.</value>
         [DataMember(Name="amount", EmitDefaultValue=false)]
-        public double? Amount { get; set; }
+        public long? Amount { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
