@@ -34,21 +34,21 @@ namespace dhango.Web.Sdk.Model
         /// </summary>
         /// <value>The amount of the previously authorized transaction that is being captured.</value>
         [DataMember(Name="amount", EmitDefaultValue=false)]
-        public long? Amount { get; set; }
+        public double? Amount { get; set; }
 
         /// <summary>
         /// The amount the payer is being charged to initiate this transaction. This should only be a non-zero amount when  you are charging the payer a fee (e.g. a convenience fee or surcharge).
         /// </summary>
         /// <value>The amount the payer is being charged to initiate this transaction. This should only be a non-zero amount when  you are charging the payer a fee (e.g. a convenience fee or surcharge).</value>
         [DataMember(Name = "payerFee", EmitDefaultValue = false)]
-        public long? PayerFee { get; set; }
+        public double? PayerFee { get; set; }
 
         /// <summary>
         /// The amount the platform is charging the account for this transaction. If left null, the fee will be calculated   automatically based on the fee settings on the account. This is only used as an override to that calculation.  Only the platform can set this fee.
         /// </summary>
         /// <value>The amount the platform is charging the account for this transaction. If left null, the fee will be calculated   automatically based on the fee settings on the account. This is only used as an override to that calculation.  Only the platform can set this fee.</value>
         [DataMember(Name = "platformFee", EmitDefaultValue = false)]
-        public long? PlatformFee { get; set; }
+        public double? PlatformFee { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

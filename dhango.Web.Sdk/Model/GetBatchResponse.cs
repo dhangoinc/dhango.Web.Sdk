@@ -41,14 +41,14 @@ namespace dhango.Web.Sdk.Model
         /// </summary>
         /// <value>The total gross amount of the batch. This will be different than the net amount if transactions in the batch were net funded.</value>
         [DataMember(Name="grossAmount", EmitDefaultValue=false)]
-        public long? GrossAmount { get; set; }
+        public double? GrossAmount { get; set; }
 
         /// <summary>
         /// The total net amount deposited to or debited from the bank account.
         /// </summary>
         /// <value>The total net amount deposited to or debited from the bank account.</value>
         [DataMember(Name="netAmount", EmitDefaultValue=false)]
-        public long? NetAmount { get; set; }
+        public double? NetAmount { get; set; }
 
         /// <summary>
         /// Gets or Sets Currency
