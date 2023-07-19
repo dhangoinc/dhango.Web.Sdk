@@ -87,7 +87,7 @@ namespace dhango.Web.Sdk.Model
         /// </summary>
         /// <value>The total amount being paid. This is inclusive of the payer fee, if any.</value>
         [DataMember(Name="amount", EmitDefaultValue=false)]
-        public long? Amount { get; set; }
+        public double? Amount { get; set; }
 
         /// <summary>
         /// Gets or Sets Currency
