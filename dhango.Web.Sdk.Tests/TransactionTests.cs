@@ -46,13 +46,13 @@ namespace dhango.Web.Sdk.Tests
 
             Assert.IsNotNull(getAuthorizeResponse);
 
-            var captureAmount = (long)Math.Round(amount * .4, 0);
+            var captureAmount = Math.Round(amount * .4, 2);
             var captureResponse = transactionsApi.TransactionsIdCapturePost(authorizeResponse.Id
                 , new PostCaptureRequest
                 {
                     Amount = captureAmount,
-                    PayerFee = (long)Math.Round(amount * .03, 0),
-                    PlatformFee = (long)Math.Round(amount * .01, 0),
+                    PayerFee = Math.Round(amount * .03, 2),
+                    PlatformFee = Math.Round(amount * .01, 2),
                 }, apiSettings.AccountKey);
 
             Assert.IsTrue(captureResponse.Id > 0);
@@ -153,8 +153,8 @@ namespace dhango.Web.Sdk.Tests
                 BillingAddress = GetAddress(),
                 ShippingAddress = GetAddress(),
                 Amount = amount,
-                PayerFee = (long)Math.Round(amount * .03, 0),
-                PlatformFee = (long)Math.Round(amount * .01, 0),
+                PayerFee = Math.Round(amount * .03, 2),
+                PlatformFee = Math.Round(amount * .01, 2),
                 Currency = Currency.USD,
                 Comments = "We are so excited about this purchase!",
             };
@@ -180,8 +180,8 @@ namespace dhango.Web.Sdk.Tests
                 BillingAddress = GetAddress(),
                 ShippingAddress = GetAddress(),
                 Amount = amount,
-                PayerFee = (long)Math.Round(amount * .03, 0),
-                PlatformFee = (long)Math.Round(amount * .01, 0),
+                PayerFee = Math.Round(amount * .03, 2),
+                PlatformFee = Math.Round(amount * .01, 2),
                 Currency = Currency.USD,
                 Comments = "We are so excited about this purchase!",
             };
