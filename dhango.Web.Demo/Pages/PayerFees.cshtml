@@ -7,7 +7,16 @@
 @section scripts
 {
     <script>
+        const d = new dhango();
+
+        d.paymentMethodAccountKey = "merchantkey";      
+        d.baseUrl = "https://api.dhangodemo.com/v1";
+
         $(document).ready(function () {
+            /*
+            This example calculates the payer fees upon submission of the form. However, a smoother experience could
+            achieved by subscribing to the "blur" event of the amount field instead.
+            */
             $('#calculatePayerFees').submit(function (event) {
                 $('#confirmation').text('');
 
@@ -16,14 +25,11 @@
                 // Retrieve form data
                 const amount = $('#amount').val();
 
-                getPayerFees("https://api.dhangodemo.com/", "merchantkey", amount, getPayerFeesHandler);
+                d.getPayerFees(amount, getPayerFeesHandler);
             });
         });
 
         function getPayerFeesHandler(getPayerFeesResponse) {
-            console.log(getPayerFeesResponse.achFee);
-            console.log(getPayerFeesResponse.cardFee);
-
             $('#confirmation').text('ACH Fee of ' + getPayerFeesResponse.achFee + ' and card fee of ' + getPayerFeesResponse.cardFee);
         }
     </script>
