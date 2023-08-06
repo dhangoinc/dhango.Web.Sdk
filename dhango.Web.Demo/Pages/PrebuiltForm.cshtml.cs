@@ -1,11 +1,12 @@
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace dhango.Web.Demo.Pages
 {
-    public class PayerFeesModel : PageModel
+    public class PreBuiltFormModel : PageModel
     {
         public void OnGet()
         {
+
         }
     }
 }
