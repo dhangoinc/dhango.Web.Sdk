@@ -7,6 +7,11 @@
 @section scripts
 {
     <script>
+        const d = new dhango();
+
+        d.paymentMethodAccountKey = "platformkey";      
+        d.baseUrl = "https://api.dhangodemo.com/v1";
+
         $(document).ready(function () {
             $('#createToken').submit(function (event) {
                 $('#confirmation').text('');
@@ -23,19 +28,19 @@
                     }
                 };
 
-                postToken("https://api.dhangodemo.com/", "merchantkey", postTokenRequest, postTokenHandler, postTokenErrorHandler);
+                d.createToken(postTokenRequest, postTokenHandler, postTokenErrorHandler);
             });
         });
 
         function postTokenHandler(postTokenResponse) {
-            console.log(postTokenResponse);
-
             $('#confirmation').text('Successfully created a token of ' + postTokenResponse.id + '.');
         }
 
         function postTokenErrorHandler(errors) {
-            // Modify the card number to trigger this error handler.
-            $('#confirmation').text(errors['Card.CardNumber']);
+            // Modify the card number to trigger this error handler. You can also obtain the specific errors
+            // using the example below.
+            // $('#confirmation').text(errors['Card.ExpirationYear']);
+            $('#confirmation').text('The payment method was not saved.');
         }
     </script>
 }
@@ -67,6 +72,7 @@
             <input name="securityCode" id="securityCode" value="123" />
         </div>
         <div>
+            <input type="hidden" id="tokenId"/>
             <button type="submit" id="submit">Submit</button>
         </div>
         <label id="confirmation"></label>
