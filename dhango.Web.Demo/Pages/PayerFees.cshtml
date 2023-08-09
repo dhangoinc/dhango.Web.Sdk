@@ -12,25 +12,22 @@
         d.paymentMethodAccountKey = "merchantkey";      
         d.baseUrl = "https://api.dhangodemo.com/v1";
 
-        $(document).ready(function () {
-            /*
-            This example calculates the payer fees upon submission of the form. However, a smoother experience could
-            achieved by subscribing to the "blur" event of the amount field instead.
-            */
-            $('#calculatePayerFees').submit(function (event) {
-                $('#confirmation').text('');
+        /*
+        This is just for an example. It may be better for the user experience to tie the
+        event handler to the blur or a related click event.
+        */
+        document.getElementById('amount').addEventListener('keyup', updateFees);
 
-                event.preventDefault(); // Prevent form submission
+        updateFees();
 
-                // Retrieve form data
-                const amount = $('#amount').val();
+        function updateFees() {
+            var amount = document.getElementById('amount').value;
 
-                d.getPayerFees(amount, getPayerFeesHandler);
-            });
-        });
+            d.getPayerFees(amount, getPayerFeesHandler);
+        }
 
         function getPayerFeesHandler(getPayerFeesResponse) {
-            $('#confirmation').text('ACH Fee of ' + getPayerFeesResponse.achFee + ' and card fee of ' + getPayerFeesResponse.cardFee);
+            document.getElementById('confirmation').textContent = 'ACH Fee of ' + getPayerFeesResponse.achFee + ' and Card fee of ' + getPayerFeesResponse.cardFee;
         }
     </script>
 }
@@ -43,8 +40,7 @@
     <form id="calculatePayerFees">
         <div>
             <label for="amount">Amount</label>
-            <input name="amount" id="amount" value="100" />
-            <button type="submit" id="submit">Submit</button>
+            <input type="number" name="amount" id="amount" value="100" />
         </div>
         <label name="confirmation" id="confirmation"></label>
     </form>
