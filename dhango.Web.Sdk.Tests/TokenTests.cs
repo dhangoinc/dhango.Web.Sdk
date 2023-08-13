@@ -72,7 +72,7 @@ namespace dhango.Web.Sdk.Tests
             }
             catch (ApiException ex)
             {
-                Assert.AreEqual(401, ex.ErrorCode);
+                Assert.AreEqual(403, ex.ErrorCode);
             }
 
             // Other operations still require the key and secret.
