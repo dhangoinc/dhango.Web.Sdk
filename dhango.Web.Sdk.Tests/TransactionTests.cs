@@ -137,6 +137,18 @@ namespace dhango.Web.Sdk.Tests
             {
                 Assert.AreEqual(404, ex.ErrorCode);
             }
+
+            try
+            {
+                // Another account key should not be able to access this transaction.
+                transactionsApi.TransactionsIdGet(authorizeResponse.Id, apiSettings.OtherAccountKey);
+
+                Assert.Fail();
+            }
+            catch (ApiException ex)
+            {
+                Assert.AreEqual(404, ex.ErrorCode);
+            }
         }
 
         [TestMethod]
