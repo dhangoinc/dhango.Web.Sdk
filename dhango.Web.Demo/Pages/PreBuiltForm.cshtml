@@ -5,7 +5,7 @@
 }
 
 @section scripts
-{
+    {
     <script>
         const d = new dhango();
 
@@ -22,7 +22,7 @@
         account key is used in both places, the token will be owned at that level and
         the payment methods shown will only be the supported methods for that account.
         */
-        d.paymentMethodAccountKey = "merchantkey";        
+        d.paymentMethodAccountKey = "merchantkey";
         // OPTIONAL: This will default to en if not specified.
         d.culture = "en";
         /*
@@ -48,6 +48,20 @@
                 }
 
                 d.saveToken(postTokenHandler, postTokenErrorHandler);
+
+            });
+
+            const spans = document.querySelectorAll('#dhangoTokenSection .button-panel');
+            spans[0].classList.add('active');
+
+            spans.forEach(span => {
+                span.addEventListener('click', function () {
+                    spans.forEach(otherSpan => {
+                        otherSpan.classList.remove('active');
+                    });
+
+                    span.classList.add('active');
+                });
             });
         });
 
@@ -68,13 +82,15 @@
     <h1 class="display-4">Use Pre-Built Form Components</h1>
     <p>This sample shows how to use Pre-Built form components.</p>
 </div>
-<div class="text-center">
-    <form id="createToken">
-        <label id="confirmation"></label>
-        <div id="dhangoTokenSection"></div>
-        <div>
-            <button type="submit" id="submit">Submit</button>
-        </div>
-    </form>
+<div class="container container__warapper">
+    <div class="row">
+        <form id="createToken">
+            <label id="confirmation"></label>
+            <div id="dhangoTokenSection"></div>
+            <div class="btn__wrapper">
+                <button type="submit" class="submit__btn" id="submit">Submit</button>
+            </div>
+        </form>
+    </div>
 </div>
 

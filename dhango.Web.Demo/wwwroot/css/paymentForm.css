@@ -1,0 +1,308 @@
+﻿div.container .container__warapper {
+  max-width: 636px;
+  padding: 10px;
+}
+
+div.form-input-element {
+  overflow: hidden;
+  height: 110px;
+}
+
+span.input-label-container {
+  display: inline-block;
+  margin-bottom: 16px;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #000;
+}
+
+
+#cardAccountHolder {
+  width: 100%;
+  padding: 16px 12px;
+  height: 48px;
+  display: inline-block;
+  border: 1px solid #ECECEE;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#cardAccountNumber {
+  width: 100%;
+  padding: 16px 12px;
+  height: 48px;
+  display: inline-block;
+  border: 1px solid #ECECEE;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#dhangoTokenSection #Card div.form-input-element .input-field .invalid-input,
+#dhangoTokenSection #ACH div.form-input-element .input-field .invalid-input {
+  border: 1px solid #EF3046;
+}
+
+#expirationMonth-container {
+  display: inline-block;
+  width: 50%;
+}
+
+#expirationYear-container {
+  display: inline-block;
+  width: 50%;
+}
+
+#securityCode-container {
+  display: inline-block;
+  width: 50%;
+}
+
+#postalCode-container {
+  display: inline-block;
+  width: 50%;
+}
+
+#expirationMonth-container span.input-field #expirationMonth {
+  width: 95%;
+  padding: 16px 12px;
+  height: 48px;
+  display: inline-block;
+  border: 1px solid #ECECEE;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#expirationYear-container span.input-field #expirationYear {
+  width: 100%;
+  padding: 16px 12px;
+  height: 48px;
+  display: inline-block;
+  border: 1px solid #ECECEE;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#securityCode-container span.input-field #securityCode {
+  width: 95%;
+  padding: 16px 12px;
+  height: 48px;
+  display: inline-block;
+  border: 1px solid #ECECEE;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#postalCode-container span.input-field #postalCode {
+  width: 100%;
+  padding: 16px 12px;
+  height: 48px;
+  display: inline-block;
+  border: 1px solid #ECECEE;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.error-label-container {
+  display: flex;
+  justify-content: end;
+}
+
+  .error-label-container label {
+    color: #EF3046;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    margin-top: 8px;
+  }
+
+  .error-label-container #expirationMonth-error-label {
+    padding-right: 15px;
+  }
+
+@media only screen and (max-width: 600px) {
+  .error-label-container #expirationMonth-error-label {
+    padding-right: 4px;
+  }
+}
+
+span.button-panel {
+  cursor: pointer;
+  color: #000;
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 285px;
+  height: 48px;
+}
+
+  span.button-panel label {
+    cursor: pointer;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16px;
+    color: #000;
+    display: flex;
+    align-items: center;
+  }
+
+#dhangoTokenSection > div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 27px;
+  background: #F4F4F7;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+span.button-panel:nth-child(1) label::before {
+  content: '\f09d';
+  font-family: "Font Awesome 5 Free";
+  padding-right: 10px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+span.button-panel:nth-child(2) label::before {
+  content: '\f19c';
+  font-family: "Font Awesome 5 Free";
+  padding-right: 10px;
+  font-weight: 900;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+input[type="radio"] {
+  opacity: 0.01;
+  z-index: 100;
+  position: absolute;
+  left: 38%;
+  transform: translate(-50%, 0%);
+}
+
+#ACH > span input[type="radio"]:checked + label,
+.Checked + label {
+  background: #545AF2;
+  color: #fff;
+}
+
+#ACH > span label {
+  padding: 12px 18px;
+  border: 1px solid #E9EAFE;
+  cursor: pointer;
+  z-index: 90;
+  border-radius: 8px;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #7A7FF5;
+  background: #EEEFFE;
+}
+
+
+  #bankAccountHolder {
+    width: 100%;
+    padding: 16px 12px;
+    height: 48px;
+    display: inline-block;
+    border: 1px solid #ECECEE;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+#routingNumber {
+  width: 100%;
+  padding: 16px 12px;
+  height: 48px;
+  display: inline-block;
+  border: 1px solid #ECECEE;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#bankAccountNumber {
+  width: 100%;
+  padding: 16px 12px;
+  height: 48px;
+  display: inline-block;
+  border: 1px solid #ECECEE;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#confirmBankAccountNumber {
+  width: 100%;
+  padding: 16px 12px;
+  height: 48px;
+  display: inline-block;
+  border: 1px solid #ECECEE;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#ACH > span {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  column-gap: 10px;
+  margin-bottom: 24px;
+}
+
+span.active {
+  background-color: #fff;
+  transition: all 0.2s ease-in-out;
+}
+
+@media only screen and (max-width: 768px) {
+  .error-label-container #expirationMonth-error-label {
+    padding-right: 0px;
+  }
+
+  #dhangoTokenSection > div {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  span.button-panel {
+    width: 100%;
+  }
+
+  #expirationMonth-container {
+    width: 100%;
+  }
+
+ #expirationMonth-container span.input-field #expirationMonth {
+      width: 100%;
+  }
+
+  #expirationYear-container {
+    width: 100%;
+  }
+  #securityCode-container {
+    width: 100%;
+  }
+ #securityCode-container span.input-field #securityCode {
+      width: 100%;
+  }
+  #postalCode-container {
+    width: 100%;
+  }
+  #ACH > span {
+    row-gap: 10px;
+    justify-content: center;
+  }
+  #ACH > span label {
+    width: 48%;
+    text-align: center;
+  }
+}

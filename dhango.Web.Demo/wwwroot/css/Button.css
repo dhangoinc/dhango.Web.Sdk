@@ -1,0 +1,31 @@
+﻿div.btn__wrapper {
+  margin-top: 10px;
+}
+
+.submit__btn {
+  background: #7875FD;
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  height: 64px;
+  padding: 0 4.5rem;
+  text-align: center;
+  transition: all .5s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+}
+
+  .submit__btn:hover {
+    box-shadow: rgba(80, 63, 205, 0.5) 0 1px 10px;
+    transition-duration: .1s;
+  }

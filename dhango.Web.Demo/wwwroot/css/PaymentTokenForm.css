@@ -1,0 +1,157 @@
+﻿
+/*
+//---------------------- PAYMENT TOKKEN CSS ------------------//*/
+
+div.tokenForm-input-element {
+  height: 115px;
+  overflow: hidden;
+}
+
+.card {
+  border-radius: 12px;
+  box-shadow: 0 0px 10px 0px rgba(65, 51, 183, 0.25);
+  background: #fff;
+  width: 90%;
+  display: block;
+  padding: 15px;
+  border: 0;
+  min-height: 600px;
+}
+
+  .card .img_block {
+    width: 100%;
+    height: 35vh;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+    .card .img_block img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+div.card__text {
+  margin-top: 30px;
+}
+
+h3.card__heading {
+  font-family: 'Inter';
+  font-weight: 500;
+  line-height: normal;
+}
+
+p.card__para {
+  font-family: 'Inter';
+  font-weight: 400;
+  margin: 0;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.22px;
+}
+
+h2.payment__info {
+  margin-bottom: 40px;
+  font-family: 'Inter';
+  font-weight: 600;
+}
+
+span.input-field .cardHolderField, .cardNumberField {
+  width: 100%;
+  padding: 16px 12px;
+  height: 48px;
+  display: inline-block;
+  border: 1px solid #ECECEE;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+span.input-labelExpirationDate-container label {
+  width: 65%;
+  display: inline-block;
+  margin-bottom: 16px;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #000;
+}
+
+
+span.input-labelSecurityCode-container label {
+  display: inline-block;
+  margin-bottom: 16px;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #000;
+}
+
+input.expirationMonthField {
+  width: 30%;
+  padding: 16px 12px;
+  height: 48px;
+  display: inline-block;
+  border: 1px solid #ECECEE;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input.expirationYearField {
+  width: 30%;
+  padding: 16px 12px;
+  height: 48px;
+  display: inline-block;
+  border: 1px solid #ECECEE;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-right: 23px;
+}
+
+input.securityCodeField {
+  width: 34%;
+  padding: 16px 12px;
+  height: 48px;
+  display: inline-block;
+  border: 1px solid #ECECEE;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+div.generated__token {
+  margin-top: 15px;
+}
+
+  div.generated__token label {
+    font-size: 14px;
+    color: darkgreen;
+    font-family: 'Inter';
+    font-weight: 400;
+  }
+
+@media only screen and (max-width: 768px) {
+  .card {
+    width: 100%;
+  }
+
+  .payment__info {
+    margin-top: 40px;
+  }
+
+  span.input-labelExpirationDate-container label {
+    width: 100%;
+  }
+
+  input.expirationMonthField {
+    width: 48%;
+    margin-right: 10px;
+  }
+
+  input.expirationYearField {
+    margin-right: 0;
+    width: 48%;
+  }
+}

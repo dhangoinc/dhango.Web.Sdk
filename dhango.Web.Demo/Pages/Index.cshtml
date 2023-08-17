@@ -5,11 +5,11 @@
 }
 
 @section scripts
-{
+    {
     <script>
         const d = new dhango();
 
-        d.paymentMethodAccountKey = "platformkey";      
+        d.paymentMethodAccountKey = "platformkey";
         d.baseUrl = "https://api.dhangodemo.com/v1";
 
         $(document).ready(function () {
@@ -49,33 +49,74 @@
     <h1 class="display-4">Create a Payment Token</h1>
     <p>This sample shows how to save a payment method and generate a token using a simple Javascript call.</p>
 </div>
-<div class="text-center">
-    <form id="createToken">
-        <div>
-            <label for="cardHolder">Card Holder</label>
-            <input name="cardHolder" id="cardHolder" value="John Smith" />
+<div class="container py-5 px-3">
+    <div class="row align-items-center justify-content-center">
+        <div class="col-lg-5 col-md-5 p-0">
+            <div class="card">
+                <div class="img_block">
+                    <img src="https://placehold.co/600x400" alt="logo" />
+                </div>
+                <div class="card__text">
+                    <h3 class="card__heading">Create a Payment Token</h3>
+                    <p class="card__para">
+                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+                        It is a long established fact that a reader.
+                    </p>
+                </div>
+            </div>
         </div>
-        <div>
-            <label for="cardNumber">Card Number</label>
-            <input name="cardNumber" id="cardNumber" value="4895379980003055" />
+        <div class="col-lg-5 col-md-5 p-0">
+            <form id="createToken">
+                <h2 class="payment__info">Payment Information</h2>
+                <div class="tokenForm-input-element">
+                    <span class="input-label-container">
+                        <label for="cardHolder">Card Holder Name</label>
+                    </span>
+                    <span class="input-field">
+                        <input name="cardHolder" class="cardHolderField" id="cardHolder" value="John Smith" />
+                    </span>
+                </div>
+                <div class="tokenForm-input-element">
+                    <span class="input-label-container">
+                        <label for="cardNumber">Card Number</label>
+                    </span>
+                    <span class="input-field">
+                        <input name="cardNumber" class="cardNumberField" id="cardNumber" value="4895379980003055" />
+                    </span>
+                </div>
+                <div class="tokenForm-input-element">
+                    <span class="input-labelExpirationDate-container">
+                        <label for="expirationMonth">Expiration Date</label>
+                    </span>
+                    <span class="input-labelSecurityCode-container d-none d-md-inline d-lg-inline">
+                        <label for="securityCode">Security Code</label>
+                    </span>
+                    <span class="input-field">
+                        <input name="expirationMonth" class="expirationMonthField" id="expirationMonth" value="12" />
+                    </span>
+                    <span class="input-field">
+                        <input name="expirationYear" class="expirationYearField" id="expirationYear" value="2025" />
+                    </span>
+                    <span class="input-field d-none d-md-inline d-lg-inline">
+                        <input name="securityCode" class="securityCodeField" id="securityCode" value="123" />
+                    </span>
+                </div>
+                <div class="tokenForm-input-element d-lg-none d-md-none d-block">
+                    <span class="input-labelSecurityCode-container">
+                        <label for="securityCode">Security Code</label>
+                    </span>
+                    <span class="input-field">
+                        <input name="cardNumber" class="cardNumberField" id="cardNumber" value="4895379980003055" />
+                    </span>
+                </div>
+                <div class="btn__wrapper">
+                    <input type="hidden" id="tokenId" />
+                    <button type="submit" class="submit__btn" id="submit">Submit</button>
+                </div>
+            </form>
+            <div class="generated__token">
+                <label id="confirmation"></label>
+            </div>
         </div>
-        <div>
-            <label for="expirationMonth">Expiration Month</label>
-            <input name="expirationMonth" id="expirationMonth" value="12" />
-        </div>
-        <div>
-            <label for="expirationYear">Expiration Year</label>
-            <input name="expirationYear" id="expirationYear" value="2025" />
-        </div>
-        <div>
-            <label for="securityCode">Security Code</label>
-            <input name="securityCode" id="securityCode" value="123" />
-        </div>
-        <div>
-            <input type="hidden" id="tokenId"/>
-            <button type="submit" id="submit">Submit</button>
-        </div>
-        <label id="confirmation"></label>
-    </form>
+    </div>
 </div>
-
