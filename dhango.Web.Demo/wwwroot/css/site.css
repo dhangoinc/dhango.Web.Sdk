@@ -16,3 +16,23 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+#submit {
+    color: #ffff;
+    display: block;
+    background: #545af2;
+    width: 100%;
+    padding: 20px;
+    border: none;
+    margin: 10px 0px;
+    border-radius: 5px;
+}
+
+#createToken {
+    max-width: 600px;
+    background: #fff;
+    margin: 0 auto;
+    padding: 15px;
+    border-radius: 15px;
+}
+
