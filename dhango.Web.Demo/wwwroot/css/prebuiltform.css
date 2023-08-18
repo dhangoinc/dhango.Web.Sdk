@@ -90,7 +90,10 @@ fieldset {
     border-radius: 5px;
     display: flex;
 }
-
+#cardVerificationContainer, #cardExpirationContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 15px; }
 .button-panel {
     width: 100%;
     text-align: center;
@@ -107,7 +110,7 @@ fieldset {
     border-bottom: 3px solid #545af2;
 }
 
-@media (max-width: 640px} {
+@media (max-width: 640px) {
     #ACH > span:first-of-type {
         display: grid;
         grid-template-columns: 1fr 1fr;
