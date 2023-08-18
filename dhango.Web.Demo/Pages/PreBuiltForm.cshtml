@@ -4,6 +4,11 @@
     ViewData["Title"] = "Pre-Built Form Components";
 }
 
+@section styles
+{
+    <link rel="stylesheet" href="~/css/prebuiltform.css" asp-append-version="true" />
+}
+
 @section scripts
 {
     <script>
@@ -78,7 +83,7 @@
     <h1 class="display-4">Use Pre-Built Form Components</h1>
     <p>This sample shows how to use Pre-Built form components.</p>
 </div>
-<div class="text-center">
+<div>
     <form id="createToken">
         <div id="dhangoTokenSection"></div>
         <div>
@@ -88,4 +93,3 @@
         <label id="confirmation"></label>
     </form>
 </div>
-
