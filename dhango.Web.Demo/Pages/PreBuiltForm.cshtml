@@ -4,6 +4,11 @@
     ViewData["Title"] = "Pre-Built Form Components";
 }
 
+@section styles
+{
+    <link rel="stylesheet" href="~/css/prebuiltform.css" asp-append-version="true" />
+}
+
 @section scripts
 {
     <script>
@@ -34,32 +39,42 @@
         */
         d.supportedPaymentMethods = [dhangoPaymentMethod.Card, dhangoPaymentMethod.ACH];
 
-        $(document).ready(function () {
-            // This call injects the form elements into the given div.
-            d.displayTokenForm("dhangoTokenSection");
+        // This call injects the form elements into the given div.
+        d.displayTokenForm("dhangoTokenSection");
 
-            $('#createToken').submit(function (event) {
-                $('#confirmation').text('');
+        document.getElementById('createToken').addEventListener('submit', submit);
 
-                event.preventDefault(); // Prevent form submission
+        function submit(event) {
+            document.getElementById('confirmation').textContent = '';
 
-                if (!d.isValid) {
-                    return;
-                }
+            event.preventDefault(); // Prevent form submission
 
-                d.saveToken(postTokenHandler, postTokenErrorHandler);
-            });
-        });
+            if (!d.isValid) {
+                return;
+            }
+
+            d.saveToken(postTokenHandler, postTokenErrorHandler);
+
+            return false;
+        }
 
         function postTokenHandler(postTokenResponse) {
-            $('#confirmation').text('Successfully created a token of ' + postTokenResponse.id + '.');
+            /*
+            Now that you have the token identifier, you will want to get just the identifier to your server.
+            One option is to set the value of a hidden form and then submit the entire form via Javascript.
+            Otherwise, you can get the elements of the form (not including the payment information), and submit
+            those to your own API.
+            */
+            document.getElementById('tokenId').value = postTokenResponse.id;
+
+            document.getElementById('confirmation').textContent = 'Successfully created token with an ID of ' + postTokenResponse.id + '.';
         }
 
         function postTokenErrorHandler(errors) {
             // Modify the card number to trigger this error handler. You can also obtain the specific errors
             // using the example below.
-            // $('#confirmation').text(errors['Card.ExpirationYear']);
-            $('#confirmation').text('The payment method was not saved.');
+            // document.getElementById('confirmation').textContent = errors['Card.ExpirationYear'];
+            document.getElementById('confirmation').textContent = 'The payment method was not saved.';
         }
     </script>
 }
@@ -68,13 +83,13 @@
     <h1 class="display-4">Use Pre-Built Form Components</h1>
     <p>This sample shows how to use Pre-Built form components.</p>
 </div>
-<div class="text-center">
+<div>
     <form id="createToken">
-        <label id="confirmation"></label>
         <div id="dhangoTokenSection"></div>
         <div>
+            <input type="hidden" id="tokenId" />
             <button type="submit" id="submit">Submit</button>
         </div>
+        <label id="confirmation"></label>
     </form>
 </div>
-

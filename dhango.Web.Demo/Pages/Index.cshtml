@@ -12,35 +12,48 @@
         d.paymentMethodAccountKey = "platformkey";      
         d.baseUrl = "https://api.dhangodemo.com/v1";
 
-        $(document).ready(function () {
-            $('#createToken').submit(function (event) {
-                $('#confirmation').text('');
+        document.getElementById('createToken').addEventListener('submit', submit);
 
-                event.preventDefault(); // Prevent form submission
+        function submit(event) {
+            document.getElementById('confirmation').textContent = '';
 
-                var postTokenRequest = {
-                    card: {
-                        cardHolder: $('#cardHolder').val(),
-                        cardNumber: $('#cardNumber').val(),
-                        expirationMonth: $('#expirationMonth').val(),
-                        expirationYear: $('#expirationYear').val(),
-                        securityCode: $('#securityCode').val()
-                    }
-                };
+            event.preventDefault();
 
-                d.createToken(postTokenRequest, postTokenHandler, postTokenErrorHandler);
-            });
-        });
+            var postTokenRequest = {
+                card: {
+                    cardHolder: document.getElementById('cardHolder').value,
+                    cardNumber: document.getElementById('cardNumber').value,
+                    expirationMonth: document.getElementById('expirationMonth').value,
+                    expirationYear: document.getElementById('expirationYear').value,
+                    securityCode: document.getElementById('securityCode').value
+                },
+                address: {
+                    postalCode: document.getElementById('postalCode').value
+                }
+            };
+
+            d.createToken(postTokenRequest, postTokenHandler, postTokenErrorHandler);
+
+            return false;
+        }
 
         function postTokenHandler(postTokenResponse) {
-            $('#confirmation').text('Successfully created a token of ' + postTokenResponse.id + '.');
+            /*
+            Now that you have the token identifier, you will want to get just the identifier to your server.
+            One option is to set the value of a hidden form and then submit the entire form via Javascript.
+            Otherwise, you can get the elements of the form (not including the payment information), and submit
+            those to your own API.
+            */
+            document.getElementById('tokenId').value = postTokenResponse.id;
+
+            document.getElementById('confirmation').textContent = 'Successfully created token with an ID of ' + postTokenResponse.id + '.';
         }
 
         function postTokenErrorHandler(errors) {
             // Modify the card number to trigger this error handler. You can also obtain the specific errors
             // using the example below.
-            // $('#confirmation').text(errors['Card.ExpirationYear']);
-            $('#confirmation').text('The payment method was not saved.');
+            // document.getElementById('confirmation').textContent = errors['Card.ExpirationYear'];
+            document.getElementById('confirmation').textContent = 'The payment method was not saved.';
         }
     </script>
 }
@@ -70,6 +83,10 @@
         <div>
             <label for="securityCode">Security Code</label>
             <input name="securityCode" id="securityCode" value="123" />
+        </div>
+        <div>
+            <label for="postalCode">Postal Code</label>
+            <input name="postalCode" id="postalCode" value="78733" />
         </div>
         <div>
             <input type="hidden" id="tokenId"/>
