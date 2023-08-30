@@ -27,22 +27,31 @@
         }
 
         function getPayerFeesHandler(getPayerFeesResponse) {
-            document.getElementById('confirmation').textContent = 'ACH Fee of ' + getPayerFeesResponse.achFee + ' and Card fee of ' + getPayerFeesResponse.cardFee;
+            if (getPayerFeesResponse.achFee == null)
+                document.getElementById('confirmation').textContent = '';
+            else
+                document.getElementById('confirmation').textContent = 'ACH Fee of ' + getPayerFeesResponse.achFee + ' and Card fee of ' + getPayerFeesResponse.cardFee;
         }
     </script>
 }
-
-<div class="text-left">
-    <h1 class="display-4">Calculate Payer Fees</h1>
-    <p>This sample shows how to get the payer fees using a simple Javascript call.</p>
+<div class="content-wrapper">
+    <div class="text-left">
+        <h1 class="display-4">Calculate Payer Fees</h1>
+        <p>This sample shows how to get the payer fees using a simple Javascript call.</p>
+        <p>&nbsp;</p>
+        <p>
+            The fees are calculated dynamically using the settings for the particular account. This form is
+            built to recalculate the payer fees each time the value in the input field is modified. Note 
+            the maximum fee on the ACH payment option is set for the demo account.
+        </p>
+    </div>
+    <div class="text-center">
+        <form id="calculatePayerFees">
+            <div>
+                <label for="amount">Amount</label>
+                <input type="number" name="amount" id="amount" value="100" />
+            </div>
+            <label name="confirmation" id="confirmation"></label>
+        </form>
+    </div>
 </div>
-<div class="text-center">
-    <form id="calculatePayerFees">
-        <div>
-            <label for="amount">Amount</label>
-            <input type="number" name="amount" id="amount" value="100" />
-        </div>
-        <label name="confirmation" id="confirmation"></label>
-    </form>
-</div>
-

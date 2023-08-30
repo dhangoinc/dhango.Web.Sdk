@@ -79,17 +79,36 @@
     </script>
 }
 
-<div class="text-left">
-    <h1 class="display-4">Use Pre-Built Form Components</h1>
-    <p>This sample shows how to use Pre-Built form components.</p>
-</div>
-<div>
-    <form id="createToken">
-        <div id="dhangoTokenSection"></div>
-        <div>
-            <input type="hidden" id="tokenId" />
-            <button type="submit" id="submit">Submit</button>
-        </div>
-        <label id="confirmation"></label>
-    </form>
+<div class="content-wrapper">
+    <div class="text-left">
+        <h1 class="display-4">Use Pre-Built Form Components</h1>
+        <p>This sample shows how to use the Pre-Built form component.</p>
+        <p>&nbsp;</p>
+        <p>
+            This option is the easiest way to integrate dhango into your application. However, the option shown
+            under <a href="~/">Create a Payment Token</a> will allow you to construct your own HTML if that is
+            your preferred approach.
+        </p>
+        <p>&nbsp;</p>
+        <p>
+            All that is required is a div in which the dhango Javascript will inject form elements to build the
+            payment method form. Once the form is constructed, the rest of the functionaliy works the same
+            as the Create a Payment Token option.
+        </p>
+        <p>&nbsp;</p>
+        <p>
+            One benefit of this approach is that the form validation is automatically built into the user
+            experience. Try clicking "Submit" without entering in data to see the validation at work.
+        </p>
+    </div>
+    <div>
+        <form id="createToken">
+            <div id="dhangoTokenSection"></div>
+            <div class="submit-container">
+                <input type="hidden" id="tokenId" />
+                <button type="submit" id="submit">Submit</button>
+            </div>
+            <label id="confirmation"></label>
+        </form>
+    </div>
 </div>
