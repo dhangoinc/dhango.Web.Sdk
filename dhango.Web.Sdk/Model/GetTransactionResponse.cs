@@ -136,6 +136,13 @@ namespace dhango.Web.Sdk.Model
         public long? OriginalTransactionId { get; set; }
 
         /// <summary>
+        /// The identifier for the transaction at the underlying processor.
+        /// </summary>
+        /// <value>The identifier for the transaction at the underlying processor.</value>
+        [DataMember(Name = "processorTransactionId", EmitDefaultValue = false)]
+        public string? ProcessorTransactionId { get; set; }
+
+        /// <summary>
         /// The list of events that occurred on this transaction.
         /// </summary>
         /// <value>The list of events that occurred on this transaction.</value>
@@ -166,6 +173,7 @@ namespace dhango.Web.Sdk.Model
             sb.Append("  ErrorMessage: ").Append(ErrorMessage).Append("\n");
             sb.Append("  TransactionEventType: ").Append(TransactionEventType).Append("\n");
             sb.Append("  OriginalTransactionId: ").Append(OriginalTransactionId).Append("\n");
+            sb.Append("  ProcessorTransactionId: ").Append(ProcessorTransactionId).Append("\n");
             sb.Append("  Events: ").Append(Events).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -276,11 +284,16 @@ namespace dhango.Web.Sdk.Model
                     this.TransactionEventType == input.TransactionEventType ||
                     (this.TransactionEventType != null &&
                     this.TransactionEventType.Equals(input.TransactionEventType))
-                ) && 
+                ) &&
                 (
                     this.OriginalTransactionId == input.OriginalTransactionId ||
                     (this.OriginalTransactionId != null &&
                     this.OriginalTransactionId.Equals(input.OriginalTransactionId))
+                ) &&
+                (
+                    this.ProcessorTransactionId == input.ProcessorTransactionId ||
+                    (this.ProcessorTransactionId != null &&
+                    this.ProcessorTransactionId.Equals(input.ProcessorTransactionId))
                 ) && 
                 (
                     this.Events == input.Events ||
@@ -331,6 +344,8 @@ namespace dhango.Web.Sdk.Model
                     hashCode = hashCode * 59 + this.TransactionEventType.GetHashCode();
                 if (this.OriginalTransactionId != null)
                     hashCode = hashCode * 59 + this.OriginalTransactionId.GetHashCode();
+                if (this.ProcessorTransactionId != null)
+                    hashCode = hashCode * 59 + this.ProcessorTransactionId.GetHashCode();
                 if (this.Events != null)
                     hashCode = hashCode * 59 + this.Events.GetHashCode();
                 return hashCode;
