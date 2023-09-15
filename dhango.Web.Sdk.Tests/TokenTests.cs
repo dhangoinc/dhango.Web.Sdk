@@ -133,7 +133,8 @@ namespace dhango.Web.Sdk.Tests
             };
             var authorizeResponse = transactionsApi.TransactionsAuthorizePost(authorizeRequest);
 
-            Assert.IsTrue(authorizeResponse.Success);
+            Assert.IsNotNull(authorizeResponse.Id);
+            Assert.IsNull(authorizeResponse.ErrorMessage);
         }
 
         [TestMethod]

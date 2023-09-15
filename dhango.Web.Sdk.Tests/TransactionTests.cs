@@ -56,10 +56,10 @@ namespace dhango.Web.Sdk.Tests
                 }, apiSettings.AccountKey);
 
             Assert.IsTrue(captureResponse.Id > 0);
+            Assert.IsNull(captureResponse.ErrorMessage);
 
             var getCaptureResponse = transactionsApi.TransactionsIdGet(captureResponse.Id, apiSettings.AccountKey);
 
-            Assert.IsTrue(captureResponse.Success);
             Assert.AreEqual(captureAmount, getCaptureResponse.Amount);
         }
 

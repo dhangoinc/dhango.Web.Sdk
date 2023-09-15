@@ -83,8 +83,8 @@ namespace dhango.Web.Sdk.Api
         /// <param name="body">Contains payment information to be stored. (optional)</param>
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
-        /// <returns>PostTokenResponse</returns>
-        PostTokenResponse TokensPost (PostTokenRequest body = null, string accountKey = null, string culture = null);
+        /// <returns>GetTokenResponse</returns>
+        GetTokenResponse TokensPost (PostTokenRequest body = null, string accountKey = null, string culture = null);
 
         /// <summary>
         /// Saves a payment method as a token for later use.
@@ -96,8 +96,8 @@ namespace dhango.Web.Sdk.Api
         /// <param name="body">Contains payment information to be stored. (optional)</param>
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
-        /// <returns>ApiResponse of PostTokenResponse</returns>
-        ApiResponse<PostTokenResponse> TokensPostWithHttpInfo (PostTokenRequest body = null, string accountKey = null, string culture = null);
+        /// <returns>ApiResponse of GetTokenResponse</returns>
+        ApiResponse<GetTokenResponse> TokensPostWithHttpInfo (PostTokenRequest body = null, string accountKey = null, string culture = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -160,8 +160,8 @@ namespace dhango.Web.Sdk.Api
         /// <param name="body">Contains payment information to be stored. (optional)</param>
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
-        /// <returns>Task of PostTokenResponse</returns>
-        System.Threading.Tasks.Task<PostTokenResponse> TokensPostAsync (PostTokenRequest body = null, string accountKey = null, string culture = null);
+        /// <returns>Task of GetTokenResponse</returns>
+        System.Threading.Tasks.Task<GetTokenResponse> TokensPostAsync (PostTokenRequest body = null, string accountKey = null, string culture = null);
 
         /// <summary>
         /// Saves a payment method as a token for later use.
@@ -173,8 +173,8 @@ namespace dhango.Web.Sdk.Api
         /// <param name="body">Contains payment information to be stored. (optional)</param>
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
-        /// <returns>Task of ApiResponse (PostTokenResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PostTokenResponse>> TokensPostAsyncWithHttpInfo (PostTokenRequest body = null, string accountKey = null, string culture = null);
+        /// <returns>Task of ApiResponse (GetTokenResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<GetTokenResponse>> TokensPostAsyncWithHttpInfo (PostTokenRequest body = null, string accountKey = null, string culture = null);
         #endregion Asynchronous Operations
     }
 
@@ -553,10 +553,10 @@ namespace dhango.Web.Sdk.Api
         /// <param name="body">Contains payment information to be stored. (optional)</param>
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
-        /// <returns>PostTokenResponse</returns>
-        public PostTokenResponse TokensPost (PostTokenRequest body = null, string accountKey = null, string culture = null)
+        /// <returns>GetTokenResponse</returns>
+        public GetTokenResponse TokensPost (PostTokenRequest body = null, string accountKey = null, string culture = null)
         {
-             ApiResponse<PostTokenResponse> localVarResponse = TokensPostWithHttpInfo(body, accountKey, culture);
+             ApiResponse<GetTokenResponse> localVarResponse = TokensPostWithHttpInfo(body, accountKey, culture);
              return localVarResponse.Data;
         }
 
@@ -567,8 +567,8 @@ namespace dhango.Web.Sdk.Api
         /// <param name="body">Contains payment information to be stored. (optional)</param>
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
-        /// <returns>ApiResponse of PostTokenResponse</returns>
-        public ApiResponse< PostTokenResponse > TokensPostWithHttpInfo (PostTokenRequest body = null, string accountKey = null, string culture = null)
+        /// <returns>ApiResponse of GetTokenResponse</returns>
+        public ApiResponse< GetTokenResponse > TokensPostWithHttpInfo (PostTokenRequest body = null, string accountKey = null, string culture = null)
         {
 
             var localVarPath = "/tokens";
@@ -627,9 +627,9 @@ namespace dhango.Web.Sdk.Api
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<PostTokenResponse>(localVarStatusCode,
+            return new ApiResponse<GetTokenResponse>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (PostTokenResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(PostTokenResponse)));
+                (GetTokenResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(GetTokenResponse)));
         }
 
         /// <summary>
@@ -639,10 +639,10 @@ namespace dhango.Web.Sdk.Api
         /// <param name="body">Contains payment information to be stored. (optional)</param>
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
-        /// <returns>Task of PostTokenResponse</returns>
-        public async System.Threading.Tasks.Task<PostTokenResponse> TokensPostAsync (PostTokenRequest body = null, string accountKey = null, string culture = null)
+        /// <returns>Task of GetTokenResponse</returns>
+        public async System.Threading.Tasks.Task<GetTokenResponse> TokensPostAsync (PostTokenRequest body = null, string accountKey = null, string culture = null)
         {
-             ApiResponse<PostTokenResponse> localVarResponse = await TokensPostAsyncWithHttpInfo(body, accountKey, culture);
+             ApiResponse<GetTokenResponse> localVarResponse = await TokensPostAsyncWithHttpInfo(body, accountKey, culture);
              return localVarResponse.Data;
 
         }
@@ -654,8 +654,8 @@ namespace dhango.Web.Sdk.Api
         /// <param name="body">Contains payment information to be stored. (optional)</param>
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
-        /// <returns>Task of ApiResponse (PostTokenResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PostTokenResponse>> TokensPostAsyncWithHttpInfo (PostTokenRequest body = null, string accountKey = null, string culture = null)
+        /// <returns>Task of ApiResponse (GetTokenResponse)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<GetTokenResponse>> TokensPostAsyncWithHttpInfo (PostTokenRequest body = null, string accountKey = null, string culture = null)
         {
 
             var localVarPath = "/tokens";
@@ -714,9 +714,9 @@ namespace dhango.Web.Sdk.Api
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<PostTokenResponse>(localVarStatusCode,
+            return new ApiResponse<GetTokenResponse>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (PostTokenResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(PostTokenResponse)));
+                (GetTokenResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(GetTokenResponse)));
         }
 
     }
