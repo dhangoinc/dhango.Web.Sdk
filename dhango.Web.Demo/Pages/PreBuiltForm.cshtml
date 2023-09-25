@@ -49,10 +49,6 @@
 
             event.preventDefault(); // Prevent form submission
 
-            if (!d.isValid) {
-                return;
-            }
-
             d.saveToken(postTokenHandler, postTokenErrorHandler);
 
             return false;
