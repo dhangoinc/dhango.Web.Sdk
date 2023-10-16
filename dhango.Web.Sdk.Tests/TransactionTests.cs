@@ -127,16 +127,8 @@ namespace dhango.Web.Sdk.Tests
 
             Assert.IsNotNull(transactionsApi.TransactionsIdGet(authorizeResponse.Id, apiSettings.AccountKey));
 
-            try
-            {
-                transactionsApi.TransactionsIdGet(authorizeResponse.Id);
-
-                Assert.Fail();
-            }
-            catch (ApiException ex)
-            {
-                Assert.AreEqual(404, ex.ErrorCode);
-            }
+            // The platform can access this transaction.
+            Assert.IsNotNull(transactionsApi.TransactionsIdGet(authorizeResponse.Id));
 
             try
             {
