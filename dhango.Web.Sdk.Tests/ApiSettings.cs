@@ -6,5 +6,6 @@
         public string Key { get; set; }
         public string Secret { get; set; }
         public string AccountKey { get; set; }
+        public string OtherAccountKey { get; set; }
     }
 }

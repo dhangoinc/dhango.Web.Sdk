@@ -1,75 +1,116 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Create a Payment Token";
 }
 
 @section scripts
 {
     <script>
-        $(document).ready(function () {
-            $('#createToken').submit(function (event) {
-                $('#confirmation').text('');
+        const d = new dhango();
 
-                event.preventDefault(); // Prevent form submission
+        d.paymentMethodAccountKey = "platformkey";      
+        d.baseUrl = "https://api.dhangodemo.com/v1";
 
-                var postTokenRequest = {
-                    card: {
-                        cardHolder: $('#cardHolder').val(),
-                        cardNumber: $('#cardNumber').val(),
-                        expirationMonth: $('#expirationMonth').val(),
-                        expirationYear: $('#expirationYear').val(),
-                        securityCode: $('#securityCode').val()
-                    }
-                };
+        document.getElementById('createToken').addEventListener('submit', submit);
 
-                postToken("https://api.dhangodemo.com/", "merchantkey", postTokenRequest, postTokenHandler, postTokenErrorHandler);
-            });
-        });
+        function submit(event) {
+            document.getElementById('confirmation').textContent = '';
+
+            event.preventDefault();
+
+            var postTokenRequest = {
+                card: {
+                    cardHolder: document.getElementById('cardHolder').value,
+                    cardNumber: document.getElementById('cardNumber').value,
+                    expirationMonth: document.getElementById('expirationMonth').value,
+                    expirationYear: document.getElementById('expirationYear').value,
+                    securityCode: document.getElementById('securityCode').value
+                },
+                address: {
+                    postalCode: document.getElementById('postalCode').value
+                }
+            };
+
+            d.createToken(postTokenRequest, postTokenHandler, postTokenErrorHandler);
+
+            return false;
+        }
 
         function postTokenHandler(postTokenResponse) {
-            console.log(postTokenResponse);
+            /*
+            Now that you have the token identifier, you will want to get just the identifier to your server.
+            One option is to set the value of a hidden form and then submit the entire form via Javascript.
+            Otherwise, you can get the elements of the form (not including the payment information), and submit
+            those to your own API.
+            */
+            document.getElementById('tokenId').value = postTokenResponse.id;
 
-            $('#confirmation').text('Successfully created a token of ' + postTokenResponse.id + '.');
+            document.getElementById('confirmation').textContent = 'Successfully created token with an ID of ' + postTokenResponse.id + '.';
         }
 
         function postTokenErrorHandler(errors) {
-            // Modify the card number to trigger this error handler.
-            $('#confirmation').text(errors['Card.CardNumber']);
+            // Modify the card number to trigger this error handler. You can also obtain the specific errors
+            // using the example below.
+            // document.getElementById('confirmation').textContent = errors['Card.ExpirationYear'];
+            document.getElementById('confirmation').textContent = 'The payment method was not saved.';
         }
     </script>
 }
 
-<div class="text-left">
-    <h1 class="display-4">Create a Payment Token</h1>
-    <p>This sample shows how to save a payment method and generate a token using a simple Javascript call.</p>
-</div>
-<div class="text-center">
-    <form id="createToken">
-        <div>
-            <label for="cardHolder">Card Holder</label>
-            <input name="cardHolder" id="cardHolder" value="John Smith" />
-        </div>
-        <div>
-            <label for="cardNumber">Card Number</label>
-            <input name="cardNumber" id="cardNumber" value="4895379980003055" />
-        </div>
-        <div>
-            <label for="expirationMonth">Expiration Month</label>
-            <input name="expirationMonth" id="expirationMonth" value="12" />
-        </div>
-        <div>
-            <label for="expirationYear">Expiration Year</label>
-            <input name="expirationYear" id="expirationYear" value="2025" />
-        </div>
-        <div>
-            <label for="securityCode">Security Code</label>
-            <input name="securityCode" id="securityCode" value="123" />
-        </div>
-        <div>
-            <button type="submit" id="submit">Submit</button>
-        </div>
-        <label id="confirmation"></label>
-    </form>
+<div class="content-wrapper">
+    <div class="text-left">
+        <h1 class="display-4">Create a Payment Token</h1>
+        <p>
+            This sample shows how to save a payment method and generate a token using a simple Javascript call.
+        </p>
+        <p>&nbsp;</p>
+        <p>
+            This implementation allows you to create your own form and use the dhango Javascript to send the payment
+            information to the dhango API for tokenization. While tokenization is supported beyond just credit/debit
+            cards, this is a simple example that only tokenizes one payment method.
+        </p>
+        <p>&nbsp;</p>
+        <p>
+            Upon sucessful tokenization, the token Id is displayed below the form. In a real-world example, your
+            application would submit only the toke to your server for saving. You can also use that token Id to
+            execute a GET /tokens/{id} against the dhango API to gather other information such as the last 4 digits,
+            the card brand, etc. This information can be shown to the user the next time they would like to use the
+            payment method.
+        </p>
+    </div>
+    <div class="text-center">
+        <form id="createToken">
+            <div>
+                <label for="cardHolder">Card Holder</label>
+                <input name="cardHolder" id="cardHolder" value="John Smith" />
+            </div>
+            <div>
+                <label for="cardNumber">Card Number</label>
+                <input name="cardNumber" id="cardNumber" value="4895379980003055" />
+            </div>
+            <div>
+                <label for="expirationMonth">Expiration Month</label>
+                <input name="expirationMonth" id="expirationMonth" value="12" />
+            </div>
+            <div>
+                <label for="expirationYear">Expiration Year</label>
+                <input name="expirationYear" id="expirationYear" value="2025" />
+            </div>
+            <div>
+                <label for="securityCode">Security Code</label>
+                <input name="securityCode" id="securityCode" value="123" />
+            </div>
+            <div>
+                <label for="postalCode">Postal Code</label>
+                <input name="postalCode" id="postalCode" value="78733" />
+            </div>
+            <div>
+                <input type="hidden" id="tokenId"/>
+                <button type="submit" id="submit">Submit</button>
+            </div>
+            <label id="confirmation"></label>
+        </form>
+    </div>
 </div>
 

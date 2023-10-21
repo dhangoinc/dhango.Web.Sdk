@@ -72,7 +72,7 @@ namespace dhango.Web.Sdk.Tests
             }
             catch (ApiException ex)
             {
-                Assert.AreEqual(401, ex.ErrorCode);
+                Assert.AreEqual(403, ex.ErrorCode);
             }
 
             // Other operations still require the key and secret.
@@ -133,7 +133,8 @@ namespace dhango.Web.Sdk.Tests
             };
             var authorizeResponse = transactionsApi.TransactionsAuthorizePost(authorizeRequest);
 
-            Assert.IsTrue(authorizeResponse.Success);
+            Assert.IsNotNull(authorizeResponse.Id);
+            Assert.IsNull(authorizeResponse.ErrorMessage);
         }
 
         [TestMethod]
@@ -189,8 +190,22 @@ namespace dhango.Web.Sdk.Tests
 
             try
             {
+                // Cannot use a merchant's token on a platform transaction.
                 var postPayRequest = CreatePostPayRequestWithTokenId(postTokenResponse.Id!);
                 var postPayResponse = transactionsApi.TransactionsPayPost(postPayRequest);
+
+                Assert.Fail();
+            }
+            catch (ApiException exception)
+            {
+                Assert.AreEqual(400, exception.ErrorCode);
+            }
+
+            try
+            {
+                // Cannot use a merchant's token on another merchant's transaction.
+                var postPayRequest = CreatePostPayRequestWithTokenId(postTokenResponse.Id!);
+                var postPayResponse = transactionsApi.TransactionsPayPost(postPayRequest, accountKey: apiSettings.OtherAccountKey);
 
                 Assert.Fail();
             }

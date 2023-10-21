@@ -19,6 +19,7 @@ namespace dhango.Web.Sdk.Tests
                 Key = configurationSection["key"],
                 Secret = configurationSection["secret"],
                 AccountKey = configurationSection["accountKey"],
+                OtherAccountKey = configurationSection["otherAccountKey"],
             };
         }
 

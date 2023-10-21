@@ -7,40 +7,51 @@
 @section scripts
 {
     <script>
-        $(document).ready(function () {
-            $('#calculatePayerFees').submit(function (event) {
-                $('#confirmation').text('');
+        const d = new dhango();
 
-                event.preventDefault(); // Prevent form submission
+        d.paymentMethodAccountKey = "merchantkey";      
+        d.baseUrl = "https://api.dhangodemo.com/v1";
 
-                // Retrieve form data
-                const amount = $('#amount').val();
+        /*
+        This is just for an example. It may be better for the user experience to tie the
+        event handler to the blur or a related click event.
+        */
+        document.getElementById('amount').addEventListener('keyup', updateFees);
 
-                getPayerFees("https://api.dhangodemo.com/", "merchantkey", amount, getPayerFeesHandler);
-            });
-        });
+        updateFees();
+
+        function updateFees() {
+            var amount = document.getElementById('amount').value;
+
+            d.getPayerFees(amount, getPayerFeesHandler);
+        }
 
         function getPayerFeesHandler(getPayerFeesResponse) {
-            console.log(getPayerFeesResponse.achFee);
-            console.log(getPayerFeesResponse.cardFee);
-
-            $('#confirmation').text('ACH Fee of ' + getPayerFeesResponse.achFee + ' and card fee of ' + getPayerFeesResponse.cardFee);
+            if (getPayerFeesResponse.achFee == null)
+                document.getElementById('confirmation').textContent = '';
+            else
+                document.getElementById('confirmation').textContent = 'ACH Fee of ' + getPayerFeesResponse.achFee + ' and Card fee of ' + getPayerFeesResponse.cardFee;
         }
     </script>
 }
-
-<div class="text-left">
-    <h1 class="display-4">Calculate Payer Fees</h1>
-    <p>This sample shows how to get the payer fees using a simple Javascript call.</p>
+<div class="content-wrapper">
+    <div class="text-left">
+        <h1 class="display-4">Calculate Payer Fees</h1>
+        <p>This sample shows how to get the payer fees using a simple Javascript call.</p>
+        <p>&nbsp;</p>
+        <p>
+            The fees are calculated dynamically using the settings for the particular account. This form is
+            built to recalculate the payer fees each time the value in the input field is modified. Note 
+            the maximum fee on the ACH payment option is set for the demo account.
+        </p>
+    </div>
+    <div class="text-center">
+        <form id="calculatePayerFees">
+            <div>
+                <label for="amount">Amount</label>
+                <input type="number" name="amount" id="amount" value="100" />
+            </div>
+            <label name="confirmation" id="confirmation"></label>
+        </form>
+    </div>
 </div>
-<div class="text-center">
-    <form id="calculatePayerFees">
-        <div>
-            <label for="amount">Amount</label>
-            <input name="amount" id="amount" value="100" />
-            <button type="submit" id="submit">Submit</button>
-        </div>
-        <label name="confirmation" id="confirmation"></label>
-    </form>
-</div>
-

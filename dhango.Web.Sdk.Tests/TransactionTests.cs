@@ -56,10 +56,10 @@ namespace dhango.Web.Sdk.Tests
                 }, apiSettings.AccountKey);
 
             Assert.IsTrue(captureResponse.Id > 0);
+            Assert.IsNull(captureResponse.ErrorMessage);
 
             var getCaptureResponse = transactionsApi.TransactionsIdGet(captureResponse.Id, apiSettings.AccountKey);
 
-            Assert.IsTrue(captureResponse.Success);
             Assert.AreEqual(captureAmount, getCaptureResponse.Amount);
         }
 
@@ -127,9 +127,13 @@ namespace dhango.Web.Sdk.Tests
 
             Assert.IsNotNull(transactionsApi.TransactionsIdGet(authorizeResponse.Id, apiSettings.AccountKey));
 
+            // The platform can access this transaction.
+            Assert.IsNotNull(transactionsApi.TransactionsIdGet(authorizeResponse.Id));
+
             try
             {
-                transactionsApi.TransactionsIdGet(authorizeResponse.Id);
+                // Another account key should not be able to access this transaction.
+                transactionsApi.TransactionsIdGet(authorizeResponse.Id, apiSettings.OtherAccountKey);
 
                 Assert.Fail();
             }
@@ -169,7 +173,7 @@ namespace dhango.Web.Sdk.Tests
         [TestMethod]
         public void CreditCardPaymentShouldWork()
         {
-            var amount = new Random().Next(10, 1500);
+            var amount = new Random().Next(10, 2000);
             var request = new PostPayRequest
             {
                 Payer = "John Smith",
