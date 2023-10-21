@@ -127,16 +127,8 @@ namespace dhango.Web.Sdk.Tests
 
             Assert.IsNotNull(transactionsApi.TransactionsIdGet(authorizeResponse.Id, apiSettings.AccountKey));
 
-            try
-            {
-                transactionsApi.TransactionsIdGet(authorizeResponse.Id);
-
-                Assert.Fail();
-            }
-            catch (ApiException ex)
-            {
-                Assert.AreEqual(404, ex.ErrorCode);
-            }
+            // The platform can access this transaction.
+            Assert.IsNotNull(transactionsApi.TransactionsIdGet(authorizeResponse.Id));
 
             try
             {
@@ -181,7 +173,7 @@ namespace dhango.Web.Sdk.Tests
         [TestMethod]
         public void CreditCardPaymentShouldWork()
         {
-            var amount = new Random().Next(10, 1500);
+            var amount = new Random().Next(10, 2000);
             var request = new PostPayRequest
             {
                 Payer = "John Smith",

@@ -190,8 +190,22 @@ namespace dhango.Web.Sdk.Tests
 
             try
             {
+                // Cannot use a merchant's token on a platform transaction.
                 var postPayRequest = CreatePostPayRequestWithTokenId(postTokenResponse.Id!);
                 var postPayResponse = transactionsApi.TransactionsPayPost(postPayRequest);
+
+                Assert.Fail();
+            }
+            catch (ApiException exception)
+            {
+                Assert.AreEqual(400, exception.ErrorCode);
+            }
+
+            try
+            {
+                // Cannot use a merchant's token on another merchant's transaction.
+                var postPayRequest = CreatePostPayRequestWithTokenId(postTokenResponse.Id!);
+                var postPayResponse = transactionsApi.TransactionsPayPost(postPayRequest, accountKey: apiSettings.OtherAccountKey);
 
                 Assert.Fail();
             }
