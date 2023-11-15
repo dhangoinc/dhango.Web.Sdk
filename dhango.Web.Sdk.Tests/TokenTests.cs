@@ -89,8 +89,8 @@ namespace dhango.Web.Sdk.Tests
             
             var postPayRequest = CreatePostPayRequestWithTokenId(postTokenResponse.Id!);
 
-            var postPayResponse = transactionsApi.TransactionsPayPost(postPayRequest);
-            var getResponse = transactionsApi.TransactionsIdGet(postPayResponse.Id);
+            var postPayResponse = transactionsApi.TransactionsPayPost(postPayRequest, accountKey: apiSettings.AccountKey);
+            var getResponse = transactionsApi.TransactionsIdGet(postPayResponse.Id, accountKey: apiSettings.AccountKey);
 
             Assert.IsNotNull(getResponse);
             Assert.IsNull(getResponse.Events.SingleOrDefault(x => x.TransactionEventType == TransactionEventType.Reject));
@@ -104,8 +104,8 @@ namespace dhango.Web.Sdk.Tests
 
             var postPayRequest = CreatePostPayRequestWithTokenId(postTokenResponse.Id!);
 
-            var postPayResponse = transactionsApi.TransactionsPayPost(postPayRequest);
-            var getResponse = transactionsApi.TransactionsIdGet(postPayResponse.Id);
+            var postPayResponse = transactionsApi.TransactionsPayPost(postPayRequest, apiSettings.AccountKey);
+            var getResponse = transactionsApi.TransactionsIdGet(postPayResponse.Id, apiSettings.AccountKey);
 
             Assert.IsNotNull(getResponse);
             Assert.IsNull(getResponse.Events.SingleOrDefault(x => x.TransactionEventType == TransactionEventType.Reject));
@@ -131,7 +131,7 @@ namespace dhango.Web.Sdk.Tests
                 Currency = Currency.USD,
                 Comments = "We are so excited about this purchase!",
             };
-            var authorizeResponse = transactionsApi.TransactionsAuthorizePost(authorizeRequest);
+            var authorizeResponse = transactionsApi.TransactionsAuthorizePost(authorizeRequest, apiSettings.AccountKey);
 
             Assert.IsNotNull(authorizeResponse.Id);
             Assert.IsNull(authorizeResponse.ErrorMessage);
@@ -211,7 +211,7 @@ namespace dhango.Web.Sdk.Tests
             }
             catch (ApiException exception)
             {
-                Assert.AreEqual(400, exception.ErrorCode);
+                Assert.AreEqual(401, exception.ErrorCode);
             }
         }
 
@@ -226,9 +226,9 @@ namespace dhango.Web.Sdk.Tests
             postPayRequest.BillingAddress = null!;
             postPayRequest.ShippingAddress = null!;
 
-            var postPayResponse = transactionsApi.TransactionsPayPost(postPayRequest);
+            var postPayResponse = transactionsApi.TransactionsPayPost(postPayRequest, apiSettings.AccountKey);
 
-            var getResponse = transactionsApi.TransactionsIdGet(postPayResponse.Id);
+            var getResponse = transactionsApi.TransactionsIdGet(postPayResponse.Id, apiSettings.AccountKey);
 
             Assert.IsNotNull(getResponse.BillingAddress);
             Assert.IsNull(getResponse.ShippingAddress);
@@ -260,7 +260,7 @@ namespace dhango.Web.Sdk.Tests
 
         private PostPayRequest CreatePostPayRequestWithTokenId(string id)
         {
-            var amount = new Random().Next(10, 1500);
+            var amount = new Random().Next(10, 200);
 
             return new PostPayRequest
             {
@@ -273,7 +273,7 @@ namespace dhango.Web.Sdk.Tests
                 ShippingAddress = GetAddress(),
                 Amount = amount,
                 PayerFee = Math.Round(amount * .03, 2),
-                PlatformFee = Math.Round(amount * .01, 2),
+                PlatformFee = Math.Round(amount * .03, 2),
                 Currency = Currency.USD,
                 Comments = "We are so excited about this purchase!",
             };

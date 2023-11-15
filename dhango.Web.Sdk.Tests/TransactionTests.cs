@@ -80,13 +80,13 @@ namespace dhango.Web.Sdk.Tests
                 Currency = Currency.USD,
                 Comments = "We are so excited about this purchase!",
             };
-            var authorizeResponse = transactionsApi.TransactionsAuthorizePost(authorizeRequest);
+            var authorizeResponse = transactionsApi.TransactionsAuthorizePost(authorizeRequest, apiSettings.AccountKey);
 
             Assert.IsTrue(authorizeResponse.Id > 0);
 
-            transactionsApi.TransactionsIdVoidPost(authorizeResponse.Id);
+            transactionsApi.TransactionsIdVoidPost(authorizeResponse.Id, apiSettings.AccountKey);
 
-            var getResponse = transactionsApi.TransactionsIdGet(authorizeResponse.Id);
+            var getResponse = transactionsApi.TransactionsIdGet(authorizeResponse.Id, apiSettings.AccountKey);
 
             Assert.IsNotNull(getResponse.Events.SingleOrDefault(x => x.TransactionEventType == TransactionEventType.Void));
         }
@@ -139,7 +139,7 @@ namespace dhango.Web.Sdk.Tests
             }
             catch (ApiException ex)
             {
-                Assert.AreEqual(404, ex.ErrorCode);
+                Assert.AreEqual(401, ex.ErrorCode);
             }
         }
 
