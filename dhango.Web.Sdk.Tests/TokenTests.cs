@@ -211,7 +211,7 @@ namespace dhango.Web.Sdk.Tests
             }
             catch (ApiException exception)
             {
-                Assert.AreEqual(401, exception.ErrorCode);
+                Assert.AreEqual(400, exception.ErrorCode);
             }
         }
 

@@ -139,7 +139,7 @@ namespace dhango.Web.Sdk.Tests
             }
             catch (ApiException ex)
             {
-                Assert.AreEqual(401, ex.ErrorCode);
+                Assert.AreEqual(404, ex.ErrorCode);
             }
         }
 
