@@ -42,6 +42,12 @@
         // This call injects the form elements into the given div.
         d.displayTokenForm("dhangoTokenSection");
 
+        /*
+        This is an optional registration of a handler so your application can be notified when the user
+        changes the active payment method.
+        */
+        d.changePaymentMethodHandler = changePaymentMethodHandler;
+
         document.getElementById('createToken').addEventListener('submit', submit);
 
         function submit(event) {
@@ -52,6 +58,10 @@
             d.saveToken(postTokenHandler, postTokenErrorHandler);
 
             return false;
+        }
+
+        function changePaymentMethodHandler() {
+            console.log('The payment method changed to ' + d.paymentMethod);
         }
 
         function postTokenHandler(postTokenResponse) {
