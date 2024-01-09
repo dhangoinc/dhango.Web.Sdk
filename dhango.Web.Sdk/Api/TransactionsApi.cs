@@ -58,13 +58,14 @@ namespace dhango.Web.Sdk.Api
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
         /// <param name="batchId">Filter for transactions in a given batch. (optional)</param>
-        /// <param name="transactionEventType">Filter by the type of event that initiated the transaction. If used in               conjunction with the begin date and/or end date, this will filter by the date associated with that event. For example,              specifying an event type of Refund as well as dates would filter for transactions that were refunded in that date range. (optional)</param>
+        /// <param name="transactionEventType">Filter by the type of event that initiated the transaction. If used in conjunction with the begin date and/or end date, this will filter by the date associated with that event. For example,              specifying an event type of Refund as well as dates would filter for transactions that were refunded in that date range. (optional)</param>
+        /// <param name="paymentMethodType">Filter by the payment method. (optional)</param>
         /// <param name="beginDate">The first date by which to filter. (optional)</param>
         /// <param name="endDate">The last date by which to filter. (optional)</param>
         /// <param name="page">The current page of the search results starting at 1. (optional, default to 1)</param>
         /// <param name="pageSize">The number of records per page. The default is 25 and the maximum is 50. (optional, default to 25)</param>
         /// <returns>GetTransactionResponseSearchResults</returns>
-        GetTransactionResponseSearchResults TransactionsGet (string accountKey = null, string culture = null, long? batchId = null, TransactionEventType? transactionEventType = null, DateTime? beginDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null);
+        GetTransactionResponseSearchResults TransactionsGet (string accountKey = null, string culture = null, long? batchId = null, TransactionEventType? transactionEventType = null, PaymentMethodType? paymentMethodType = null, DateTime? beginDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null);
 
         /// <summary>
         /// Returns a list of transactions that match the search criteria.
@@ -76,13 +77,14 @@ namespace dhango.Web.Sdk.Api
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
         /// <param name="batchId">Filter for transactions in a given batch. (optional)</param>
-        /// <param name="transactionEventType">Filter by the type of event that initiated the transaction. If used in               conjunction with the begin date and/or end date, this will filter by the date associated with that event. For example,              specifying an event type of Refund as well as dates would filter for transactions that were refunded in that date range. (optional)</param>
+        /// <param name="transactionEventType">Filter by the type of event that initiated the transaction. If used in conjunction with the begin date and/or end date, this will filter by the date associated with that event. For example,              specifying an event type of Refund as well as dates would filter for transactions that were refunded in that date range. (optional)</param>
+        /// <param name="paymentMethodType">Filter by the payment method. (optional)</param>
         /// <param name="beginDate">The first date by which to filter. (optional)</param>
         /// <param name="endDate">The last date by which to filter. (optional)</param>
         /// <param name="page">The current page of the search results starting at 1. (optional, default to 1)</param>
         /// <param name="pageSize">The number of records per page. The default is 25 and the maximum is 50. (optional, default to 25)</param>
         /// <returns>ApiResponse of GetTransactionResponseSearchResults</returns>
-        ApiResponse<GetTransactionResponseSearchResults> TransactionsGetWithHttpInfo (string accountKey = null, string culture = null, long? batchId = null, TransactionEventType? transactionEventType = null, DateTime? beginDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null);
+        ApiResponse<GetTransactionResponseSearchResults> TransactionsGetWithHttpInfo (string accountKey = null, string culture = null, long? batchId = null, TransactionEventType? transactionEventType = null, PaymentMethodType? paymentMethodType = null, DateTime? beginDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null);
         /// <summary>
         /// Attempts to capture a payment from a previously authorized transaction.
         /// </summary>
@@ -249,13 +251,14 @@ namespace dhango.Web.Sdk.Api
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
         /// <param name="batchId">Filter for transactions in a given batch. (optional)</param>
-        /// <param name="transactionEventType">Filter by the type of event that initiated the transaction. If used in               conjunction with the begin date and/or end date, this will filter by the date associated with that event. For example,              specifying an event type of Refund as well as dates would filter for transactions that were refunded in that date range. (optional)</param>
+        /// <param name="transactionEventType">Filter by the type of event that initiated the transaction. If used in conjunction with the begin date and/or end date, this will filter by the date associated with that event. For example,              specifying an event type of Refund as well as dates would filter for transactions that were refunded in that date range. (optional)</param>
+        /// <param name="paymentMethodType">Filter by the payment method. (optional)</param>
         /// <param name="beginDate">The first date by which to filter. (optional)</param>
         /// <param name="endDate">The last date by which to filter. (optional)</param>
         /// <param name="page">The current page of the search results starting at 1. (optional, default to 1)</param>
         /// <param name="pageSize">The number of records per page. The default is 25 and the maximum is 50. (optional, default to 25)</param>
         /// <returns>Task of GetTransactionResponseSearchResults</returns>
-        System.Threading.Tasks.Task<GetTransactionResponseSearchResults> TransactionsGetAsync (string accountKey = null, string culture = null, long? batchId = null, TransactionEventType? transactionEventType = null, DateTime? beginDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null);
+        System.Threading.Tasks.Task<GetTransactionResponseSearchResults> TransactionsGetAsync (string accountKey = null, string culture = null, long? batchId = null, TransactionEventType? transactionEventType = null, PaymentMethodType? paymentMethodType = null, DateTime? beginDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null);
 
         /// <summary>
         /// Returns a list of transactions that match the search criteria.
@@ -267,13 +270,14 @@ namespace dhango.Web.Sdk.Api
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
         /// <param name="batchId">Filter for transactions in a given batch. (optional)</param>
-        /// <param name="transactionEventType">Filter by the type of event that initiated the transaction. If used in               conjunction with the begin date and/or end date, this will filter by the date associated with that event. For example,              specifying an event type of Refund as well as dates would filter for transactions that were refunded in that date range. (optional)</param>
+        /// <param name="transactionEventType">Filter by the type of event that initiated the transaction. If used in conjunction with the begin date and/or end date, this will filter by the date associated with that event. For example,              specifying an event type of Refund as well as dates would filter for transactions that were refunded in that date range. (optional)</param>
+        /// <param name="paymentMethodType">Filter by the payment method. (optional)</param>
         /// <param name="beginDate">The first date by which to filter. (optional)</param>
         /// <param name="endDate">The last date by which to filter. (optional)</param>
         /// <param name="page">The current page of the search results starting at 1. (optional, default to 1)</param>
         /// <param name="pageSize">The number of records per page. The default is 25 and the maximum is 50. (optional, default to 25)</param>
         /// <returns>Task of ApiResponse (GetTransactionResponseSearchResults)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GetTransactionResponseSearchResults>> TransactionsGetAsyncWithHttpInfo (string accountKey = null, string culture = null, long? batchId = null, TransactionEventType? transactionEventType = null, DateTime? beginDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null);
+        System.Threading.Tasks.Task<ApiResponse<GetTransactionResponseSearchResults>> TransactionsGetAsyncWithHttpInfo (string accountKey = null, string culture = null, long? batchId = null, TransactionEventType? transactionEventType = null, PaymentMethodType? paymentMethodType = null, DateTime? beginDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null);
         /// <summary>
         /// Attempts to capture a payment from a previously authorized transaction.
         /// </summary>
@@ -636,21 +640,22 @@ namespace dhango.Web.Sdk.Api
         }
 
         /// <summary>
-        /// Returns a list of transactions that match the search criteria. 
+        /// Returns a list of transactions that match the search criteria.
         /// </summary>
         /// <exception cref="dhango.Web.Sdk.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
         /// <param name="batchId">Filter for transactions in a given batch. (optional)</param>
-        /// <param name="transactionEventType">Filter by the type of event that initiated the transaction. If used in               conjunction with the begin date and/or end date, this will filter by the date associated with that event. For example,              specifying an event type of Refund as well as dates would filter for transactions that were refunded in that date range. (optional)</param>
+        /// <param name="transactionEventType">Filter by the type of event that initiated the transaction. If used in conjunction with the begin date and/or end date, this will filter by the date associated with that event. For example,              specifying an event type of Refund as well as dates would filter for transactions that were refunded in that date range. (optional)</param>
+        /// <param name="paymentMethodType">Filter by the payment method. (optional)</param>
         /// <param name="beginDate">The first date by which to filter. (optional)</param>
         /// <param name="endDate">The last date by which to filter. (optional)</param>
         /// <param name="page">The current page of the search results starting at 1. (optional, default to 1)</param>
         /// <param name="pageSize">The number of records per page. The default is 25 and the maximum is 50. (optional, default to 25)</param>
         /// <returns>GetTransactionResponseSearchResults</returns>
-        public GetTransactionResponseSearchResults TransactionsGet (string accountKey = null, string culture = null, long? batchId = null, TransactionEventType? transactionEventType = null, DateTime? beginDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null)
+        public GetTransactionResponseSearchResults TransactionsGet (string accountKey = null, string culture = null, long? batchId = null, TransactionEventType? transactionEventType = null, PaymentMethodType? paymentMethodType = null, DateTime? beginDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null)
         {
-             ApiResponse<GetTransactionResponseSearchResults> localVarResponse = TransactionsGetWithHttpInfo(accountKey, culture, batchId, transactionEventType, beginDate, endDate, page, pageSize);
+             ApiResponse<GetTransactionResponseSearchResults> localVarResponse = TransactionsGetWithHttpInfo(accountKey, culture, batchId, transactionEventType, paymentMethodType, beginDate, endDate, page, pageSize);
              return localVarResponse.Data;
         }
 
@@ -661,13 +666,14 @@ namespace dhango.Web.Sdk.Api
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
         /// <param name="batchId">Filter for transactions in a given batch. (optional)</param>
-        /// <param name="transactionEventType">Filter by the type of event that initiated the transaction. If used in               conjunction with the begin date and/or end date, this will filter by the date associated with that event. For example,              specifying an event type of Refund as well as dates would filter for transactions that were refunded in that date range. (optional)</param>
+        /// <param name="transactionEventType">Filter by the type of event that initiated the transaction. If used in conjunction with the begin date and/or end date, this will filter by the date associated with that event. For example,              specifying an event type of Refund as well as dates would filter for transactions that were refunded in that date range. (optional)</param>
+        /// <param name="paymentMethodType">Filter by the payment method. (optional)</param>
         /// <param name="beginDate">The first date by which to filter. (optional)</param>
         /// <param name="endDate">The last date by which to filter. (optional)</param>
         /// <param name="page">The current page of the search results starting at 1. (optional, default to 1)</param>
         /// <param name="pageSize">The number of records per page. The default is 25 and the maximum is 50. (optional, default to 25)</param>
         /// <returns>ApiResponse of GetTransactionResponseSearchResults</returns>
-        public ApiResponse< GetTransactionResponseSearchResults > TransactionsGetWithHttpInfo (string accountKey = null, string culture = null, long? batchId = null, TransactionEventType? transactionEventType = null, DateTime? beginDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null)
+        public ApiResponse< GetTransactionResponseSearchResults > TransactionsGetWithHttpInfo (string accountKey = null, string culture = null, long? batchId = null, TransactionEventType? transactionEventType = null, PaymentMethodType? paymentMethodType = null, DateTime? beginDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null)
         {
 
             var localVarPath = "/transactions";
@@ -695,6 +701,7 @@ namespace dhango.Web.Sdk.Api
 
             if (batchId != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "batchId", batchId)); // query parameter
             if (transactionEventType != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "transactionEventType", transactionEventType)); // query parameter
+            if (paymentMethodType != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "paymentMethodType", paymentMethodType)); // query parameter
             if (beginDate != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "beginDate", beginDate)); // query parameter
             if (endDate != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "endDate", endDate)); // query parameter
             if (page != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "page", page)); // query parameter
@@ -733,15 +740,16 @@ namespace dhango.Web.Sdk.Api
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
         /// <param name="batchId">Filter for transactions in a given batch. (optional)</param>
-        /// <param name="transactionEventType">Filter by the type of event that initiated the transaction. If used in               conjunction with the begin date and/or end date, this will filter by the date associated with that event. For example,              specifying an event type of Refund as well as dates would filter for transactions that were refunded in that date range. (optional)</param>
+        /// <param name="transactionEventType">Filter by the type of event that initiated the transaction. If used in conjunction with the begin date and/or end date, this will filter by the date associated with that event. For example,              specifying an event type of Refund as well as dates would filter for transactions that were refunded in that date range. (optional)</param>
+        /// <param name="paymentMethodType">Filter by the payment method. (optional)</param>
         /// <param name="beginDate">The first date by which to filter. (optional)</param>
         /// <param name="endDate">The last date by which to filter. (optional)</param>
         /// <param name="page">The current page of the search results starting at 1. (optional, default to 1)</param>
         /// <param name="pageSize">The number of records per page. The default is 25 and the maximum is 50. (optional, default to 25)</param>
         /// <returns>Task of GetTransactionResponseSearchResults</returns>
-        public async System.Threading.Tasks.Task<GetTransactionResponseSearchResults> TransactionsGetAsync (string accountKey = null, string culture = null, long? batchId = null, TransactionEventType? transactionEventType = null, DateTime? beginDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null)
+        public async System.Threading.Tasks.Task<GetTransactionResponseSearchResults> TransactionsGetAsync (string accountKey = null, string culture = null, long? batchId = null, TransactionEventType? transactionEventType = null, PaymentMethodType? paymentMethodType = null, DateTime? beginDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null)
         {
-             ApiResponse<GetTransactionResponseSearchResults> localVarResponse = await TransactionsGetAsyncWithHttpInfo(accountKey, culture, batchId, transactionEventType, beginDate, endDate, page, pageSize);
+             ApiResponse<GetTransactionResponseSearchResults> localVarResponse = await TransactionsGetAsyncWithHttpInfo(accountKey, culture, batchId, transactionEventType, paymentMethodType, beginDate, endDate, page, pageSize);
              return localVarResponse.Data;
 
         }
@@ -753,13 +761,14 @@ namespace dhango.Web.Sdk.Api
         /// <param name="accountKey">Used to make API calls on behalf of another account. (optional)</param>
         /// <param name="culture">The culture to be used when setting the language for error messages. (optional)</param>
         /// <param name="batchId">Filter for transactions in a given batch. (optional)</param>
-        /// <param name="transactionEventType">Filter by the type of event that initiated the transaction. If used in               conjunction with the begin date and/or end date, this will filter by the date associated with that event. For example,              specifying an event type of Refund as well as dates would filter for transactions that were refunded in that date range. (optional)</param>
+        /// <param name="transactionEventType">Filter by the type of event that initiated the transaction. If used in conjunction with the begin date and/or end date, this will filter by the date associated with that event. For example,              specifying an event type of Refund as well as dates would filter for transactions that were refunded in that date range. (optional)</param>
+        /// <param name="paymentMethodType">Filter by the payment method. (optional)</param>
         /// <param name="beginDate">The first date by which to filter. (optional)</param>
         /// <param name="endDate">The last date by which to filter. (optional)</param>
         /// <param name="page">The current page of the search results starting at 1. (optional, default to 1)</param>
         /// <param name="pageSize">The number of records per page. The default is 25 and the maximum is 50. (optional, default to 25)</param>
         /// <returns>Task of ApiResponse (GetTransactionResponseSearchResults)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<GetTransactionResponseSearchResults>> TransactionsGetAsyncWithHttpInfo (string accountKey = null, string culture = null, long? batchId = null, TransactionEventType? transactionEventType = null, DateTime? beginDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null)
+        public async System.Threading.Tasks.Task<ApiResponse<GetTransactionResponseSearchResults>> TransactionsGetAsyncWithHttpInfo (string accountKey = null, string culture = null, long? batchId = null, TransactionEventType? transactionEventType = null, PaymentMethodType? paymentMethodType = null, DateTime? beginDate = null, DateTime? endDate = null, int? page = null, int? pageSize = null)
         {
 
             var localVarPath = "/transactions";
@@ -787,6 +796,7 @@ namespace dhango.Web.Sdk.Api
 
             if (batchId != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "batchId", batchId)); // query parameter
             if (transactionEventType != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "transactionEventType", transactionEventType)); // query parameter
+            if (paymentMethodType != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "paymentMethodType", paymentMethodType)); // query parameter
             if (beginDate != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "beginDate", beginDate)); // query parameter
             if (endDate != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "endDate", endDate)); // query parameter
             if (page != null) localVarQueryParams.AddRange(this.Configuration.ApiClient.ParameterToKeyValuePairs("", "page", page)); // query parameter
