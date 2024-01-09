@@ -27,7 +27,7 @@ namespace dhango.Web.Sdk.Model
     /// Defines TransactionEventType
     /// </summary>
     [JsonConverter(typeof(StringEnumConverter))]
-        public enum TransactionEventType
+    public enum TransactionEventType
     {
         /// <summary>
         /// Enum Payment for value: Payment
