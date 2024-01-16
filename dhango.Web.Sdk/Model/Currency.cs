@@ -37,6 +37,22 @@ namespace dhango.Web.Sdk.Model
         /// <summary>
         /// Enum CAN for value: CAN
         /// </summary>
-        [EnumMember(Value = "CAN")]
-        CAN = 2    }
+        [EnumMember(Value = "CAD")]
+        CAN = 2,
+        /// <summary>
+        /// Enum EUR for value: EUR
+        /// </summary>
+        [EnumMember(Value = "EUR")]
+        EUR = 3,
+        /// <summary>
+        /// Enum AUD for value: AUD
+        /// </summary>
+        [EnumMember(Value = "AUD")]
+        AUD = 4,
+        /// <summary>
+        /// Enum GBP for value: GBP
+        /// </summary>
+        [EnumMember(Value = "GBP")]
+        GBP = 5
+    }
 }
