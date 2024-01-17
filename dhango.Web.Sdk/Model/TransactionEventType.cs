@@ -67,8 +67,8 @@ namespace dhango.Web.Sdk.Model
         /// <summary>
         /// Enum ChargebackDispute for value: ChargebackDispute
         /// </summary>
-        [EnumMember(Value = "ChargebackDispute")]
-        ChargebackDispute = 8,
+        [EnumMember(Value = "Dispute")]
+        Dispute = 8,
         /// <summary>
         /// Enum Settle for value: Settle
         /// </summary>
@@ -88,5 +88,11 @@ namespace dhango.Web.Sdk.Model
         /// Enum Void for value: Void
         /// </summary>
         [EnumMember(Value = "Void")]
-        Void = 12    }
+        Void = 12,
+        /// <summary>
+        /// Enum Batch for value: Batch
+        /// </summary>
+        [EnumMember(Value = "Batch")]
+        Batch = 100
+    }
 }
