@@ -28,10 +28,10 @@ namespace dhango.Web.Sdk.Tests
             return new Card
             {
                 CardHolder = "John Smith",
-                CardNumber = "4895379980003055",
-                ExpirationMonth = 12,
-                ExpirationYear = 2025,
-                SecurityCode = "123"
+                CardNumber = "4000620000000007",
+                ExpirationMonth = 3,
+                ExpirationYear = 2030,
+                SecurityCode = "737"
             };
         }
 
@@ -41,8 +41,8 @@ namespace dhango.Web.Sdk.Tests
             {
                 BankAccountHolder = "Acme Corporation",
                 BankAccountType = BankAccountType.CorporateSavings,
-                RoutingNumber = "021000021",
-                AccountNumber = "08292983191"
+                RoutingNumber = "111000025",
+                AccountNumber = "000111111113"
             };
         }
 
