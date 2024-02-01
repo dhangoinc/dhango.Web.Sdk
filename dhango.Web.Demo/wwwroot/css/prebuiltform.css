@@ -110,7 +110,7 @@ fieldset {
     content: "";
     position: absolute;
     top: 55%;
-    left: -50px;
+    left: -40px;
     transform: translateY(-50%);
     width: 30px;
     height: 30px;
@@ -123,7 +123,7 @@ fieldset {
     content: "";
     position: absolute;
     top: 50%;
-    left: -50px;
+    left: -40px;
     transform: translateY(-50%);
     width: 30px;
     height: 30px;
