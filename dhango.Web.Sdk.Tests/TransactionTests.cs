@@ -64,6 +64,68 @@ namespace dhango.Web.Sdk.Tests
         }
 
         [TestMethod]
+        public void AuthorizeAndCaptureWithLevel23ShouldWork()
+        {
+            var amount = 500;
+            var authorizeRequest = new PostAuthorizeRequest
+            {
+                Payer = "John Smith",
+                UserId = "jsmith12345",
+                EmailAddress = "jsmith@example.com",
+                Card = GetCard(),
+                Metadata = GetMetadata(),
+                BillingAddress = GetAddress(),
+                ShippingAddress = GetAddress(),
+                Amount = amount,
+                Currency = Currency.USD,
+                Comments = "We are so excited about this purchase!",
+
+                CustomerId = "1234567890",
+                OrderId = "abcdefghi",
+            };
+            var authorizeResponse = transactionsApi.TransactionsAuthorizePost(authorizeRequest, apiSettings.AccountKey);
+
+            Assert.IsTrue(authorizeResponse.Id > 0);
+
+            var getAuthorizeResponse = transactionsApi.TransactionsIdGet(authorizeResponse.Id, apiSettings.AccountKey);
+
+            Assert.IsNotNull(getAuthorizeResponse);
+
+            var captureAmount = 161.24d;
+            var captureResponse = transactionsApi.TransactionsIdCapturePost(authorizeResponse.Id
+                , new PostCaptureRequest
+                {
+                    Amount = captureAmount,
+                    PayerFee = Math.Round(amount * .03, 2),
+                    PlatformFee = Math.Round(amount * .01, 2),
+
+                    TaxAmount = 40,
+                    ShippingAmount = 15,
+                    LineItems = new List<TransactionLineItem>
+                    {
+                        new TransactionLineItem
+                        {
+                            ProductCode = "widget123",
+                            ProductDescription = "Shiny new widget.",
+                            UnitPrice = 51.2,
+                            Quantity = 3,
+                            TaxAmount = .51,
+                            DiscountAmount = 7.87,
+                            UnitOfMeasure = "ea",
+                            CommodityCode = "44121709",
+                        }
+                    }
+                }, apiSettings.AccountKey);
+
+            Assert.IsTrue(captureResponse.Id > 0);
+            Assert.IsNull(captureResponse.ErrorMessage);
+
+            var getCaptureResponse = transactionsApi.TransactionsIdGet(captureResponse.Id, apiSettings.AccountKey);
+
+            Assert.AreEqual(captureAmount, getCaptureResponse.Amount);
+        }
+
+        [TestMethod]
         public void AuthorizeAndVoidShouldWork()
         {
             var amount = new Random().Next(10, 1500);
@@ -188,6 +250,52 @@ namespace dhango.Web.Sdk.Tests
                 PlatformFee = Math.Round(amount * .01, 2),
                 Currency = Currency.USD,
                 Comments = "We are so excited about this purchase!",
+            };
+
+            var postPayResponse = transactionsApi.TransactionsPayPost(request, apiSettings.AccountKey);
+            var getResponse = transactionsApi.TransactionsIdGet(postPayResponse.Id, apiSettings.AccountKey);
+
+            Assert.IsNotNull(getResponse);
+            Assert.IsNull(getResponse.Events.SingleOrDefault(x => x.TransactionEventType == TransactionEventType.Reject));
+        }
+
+        [TestMethod]
+        public void CreditCardPaymentWithLevel23ShouldWork()
+        {
+            var amount = 161.24d;
+            var request = new PostPayRequest
+            {
+                Payer = "John Smith",
+                UserId = "jsmith12345",
+                EmailAddress = "jsmith@example.com",
+                Card = GetCard(),
+                Metadata = GetMetadata(),
+                BillingAddress = GetAddress(),
+                ShippingAddress = GetAddress(),
+                Amount = amount,
+                PayerFee = Math.Round(amount * .03, 2),
+                PlatformFee = Math.Round(amount * .01, 2),
+                Currency = Currency.USD,
+                Comments = "We are so excited about this purchase!",
+
+                CustomerId = "1234567890",
+                OrderId = "abcdefghi",
+                TaxAmount = 40,
+                ShippingAmount = 15,
+                LineItems = new List<TransactionLineItem>
+                {
+                    new TransactionLineItem
+                    {
+                        ProductCode = "widget123",
+                        ProductDescription = "Shiny new widget.",
+                        UnitPrice = 51.2,
+                        Quantity = 3,
+                        TaxAmount = .51,
+                        DiscountAmount = 7.87,
+                        UnitOfMeasure = "ea",
+                        CommodityCode = "44121709",
+                    }
+                }
             };
 
             var postPayResponse = transactionsApi.TransactionsPayPost(request, apiSettings.AccountKey);
