@@ -28,10 +28,10 @@ namespace dhango.Web.Sdk.Tests
             return new Card
             {
                 CardHolder = "John Smith",
-                CardNumber = "4895379980003055",
-                ExpirationMonth = 12,
-                ExpirationYear = 2025,
-                SecurityCode = "123"
+                CardNumber = "4111111111111111",
+                ExpirationMonth = 3,
+                ExpirationYear = 2030,
+                SecurityCode = "737"
             };
         }
 
