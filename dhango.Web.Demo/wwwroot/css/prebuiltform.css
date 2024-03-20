@@ -1,14 +1,78 @@
-﻿input[name="bankAccountType"] {
+﻿﻿html {
+    --dh-label-padding-top: 10px;
+    --dh-primary-black: #212529;
+}
+
+/* Payment Method container */
+.payment-method-container {
+    margin: 16px 0;
+    padding: 16px;
+    border: 1px solid gray;
+}
+
+    .payment-method-container.payment-method-container-active {
+        border-color: #545af2;
+    }
+/* End: Payment Method container */
+
+/* Payment Method selection radio button */
+.radio-container {
+    height: 28px;
+    padding: 0;
+}
+
+.radio-input {
+    margin: 0;
+    height: 16px;
+    width: 16px;
+}
+
+.radio-label,
+.radio-input,
+.radio-label-text,
+.radio-label-icon {
+    vertical-align: middle;
+}
+
+.radio-label {
+    margin-left: 6px;
+}
+
+.radio-label-icon {
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: 24px;
+    background-color: #000;
+}
+
+.radio-label-icon-card {
+    mask-image: url('/icons/card.svg');
+}
+
+.radio-label-icon-ach {
+    mask-image: url('/icons/bank.svg');
+}
+
+.radio-label-text {
+    margin-left: 6px;
+}
+/* End: Payment Method selection radio button */
+
+input[name="bankAccountType"] {
     display: none;
 }
 
 #ACH > span:first-of-type {
     display: flex;
     column-gap: 10px;
+    margin-top: 10px;
 }
 
 #ACH > span > label {
-    padding: 10px;
+    padding: 5px 10px;
     background: #EDEFFE;
     color: #8F8CE3;
     border-radius: 8px;
@@ -18,10 +82,10 @@
     cursor: pointer;
 }
 
-#ACH > span > input:checked + label, #ACH > span > label:active, #ACH > span > label:hover {
-    color: #fff;
-    background: #545af2;
-}
+    #ACH > span > input:checked + label, #ACH > span > label:active, #ACH > span > label:hover {
+        color: #fff;
+        background: #545af2;
+    }
 
 .input-label-container {
     padding: 10px 0px;
@@ -32,14 +96,14 @@
 .error-label-container {
     color: #f25f6f;
     float: right;
-    margin: 5px 0px 0;
+    margin: 5px 0 0;
     text-align: right;
     font-size: 10px;
 }
 
-.error-label-container label {
-    font-size: 11px;
-}
+    .error-label-container label {
+        font-size: 11px;
+    }
 
 #dhangoContainer {
     max-width: 600px;
@@ -79,55 +143,10 @@ fieldset {
     display: inline;
 }
 
-#dhangoContainer > div:first-of-type {
-    margin-bottom: 10px;
-    border-bottom: 1px solid #F4F3F8;
-    border-radius: 5px;
-    display: flex;
-}
-
 #cardVerificationContainer, #cardNumberContainer, #bankAccountHolderContainer, #bankAccountNumberContainer {
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 15px;
-}
-
-.button-panel {
-    width: 100%;
-    text-align: center;
-    padding: 20px 10px;
-    font-weight: bold;
-    border-bottom: 3px solid transparent;
-}
-
-#Card-button-panel label, #ACH-button-panel label {
-    position: relative;
-}
-
-#Card-button-panel label::before {
-    background-image: url('/icons/card.svg');
-    background-repeat: no-repeat;
-    content: "";
-    position: absolute;
-    top: 55%;
-    left: -40px;
-    transform: translateY(-50%);
-    width: 30px;
-    height: 30px;
-    background-size: 100%,100%;
-}
-
-#ACH-button-panel label::before {
-    background-image: url('/icons/bank.svg');
-    background-repeat: no-repeat;
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: -40px;
-    transform: translateY(-50%);
-    width: 30px;
-    height: 30px;
-    background-size: 100%,100%;
 }
 
 ::-webkit-input-placeholder, :-ms-input-placeholder, ::placeholder {
@@ -166,18 +185,18 @@ input[type=number] {
     position: relative;
 }
 
-#cardAccountNumber-container .input-field::after {
-    background-image: url('/icons/empty-card.svg');
-    background-repeat: no-repeat;
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 15px;
-    transform: translateY(-50%);
-    width: 30px;
-    height: 30px;
-    background-size: 100%,100%;
-}
+    #cardAccountNumber-container .input-field::after {
+        background-image: url('/icons/empty-card.svg');
+        background-repeat: no-repeat;
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 15px;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 30px;
+        background-size: 100%,100%;
+    }
 
 #cardAccountNumber-container.visa .input-field::after {
     background-image: url('/icons/visa.svg');
